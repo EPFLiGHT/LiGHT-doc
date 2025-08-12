@@ -1,0 +1,24 @@
+site_name: LiGHT documentation
+theme:
+  name: material
+  logo: assets/light_logo.png
+  palette:
+    # I'm not a frontend dev
+    primary: light blue
+  features:
+    - navigation.path
+    - navigation.tabs
+    - navigation.expand
+    - toc.integrate
+  
+nav:
+  - Home: index.md
+  - Getting started: gettingstarted.md
+  - Projects: projects.md
+  - Connecting to clusters: 
+    - Overview: clusters.md
+    - RCP: clusters/rcp.md
+    - CSCS: clusters/cscs.md
+  - Contributing: contributing.md
+  - About: about.md
+
