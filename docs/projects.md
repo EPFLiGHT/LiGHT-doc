@@ -25,3 +25,7 @@ MMORE stands for Massive Multimodal Open RAG & Extraction, it is our Python libr
 ## 3. Moove
 
 TODO
+
+## 4. HIC-Lab AI Bootcamp
+
+Very cool project about teaching the basics of AI applied to healthcare to healthcare workers and computer scientists in Rwanda. Our work in LiGHT is to improve the content of the bootcamp so that students learn better, and mentor students there.
