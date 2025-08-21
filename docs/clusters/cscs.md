@@ -254,6 +254,16 @@ git clone https://github.com/OpenMeditron/MultiMeditron.git
 
 When GitHub asks for your password, input the PAT that you have generated in this step.
 
+## Create a personal folder in the capstor partition
+
+```
+# CSCS login node
+
+mkdir /capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME
+```
+
+This personal folder on the capstor will be mainly used to store your huggingface home and your big files that don't fit in your users personal folder
+
 ## Setup the environment on the cluster
 
 > *__IMPORTANT NOTE__:* NEVER RUN ANY COMPUTE JOB ON THE LOGIN NODE (or else you will slow down everyone on the cluster). THE LOGIN NODE SHOULD ONLY BE USED TO SCHEDULE JOB.
@@ -269,7 +279,6 @@ mkdir /users/$CSCS_USERNAME/.edf
 ```
 
 
-
 Create a `.edf/multimodal.toml` file:
 
 ```
@@ -278,7 +287,7 @@ mounts = ["/capstor", "/iopsstor", "/users"]
 
 writable = true
 
-workdir = "path/to/MultiMeditron"
+workdir = "/users/$CSCS_USERNAME/meditron/MultiMeditron"
 
 [annotations]
 com.hooks.aws_ofi_nccl.enabled = "true"
@@ -329,9 +338,151 @@ Here is a breakdown of the command:
     - `debug`: with a maximum running time of 1h30 with only one node. This partition is meant for interactive jobs
     - `xfer`: this partition is meant for data transfer and doesn't claim any GPU
 
+To check if you have been allocated a node, run the following command in another terminal:
 
+```
+# CSCS login node
 
+squeue --me --start
+```
+
+This command will give you a dynamic estimation of the scheduled time (may change as people pass you in the priority queue). Note that this command doesn't output anything if your job has been allocated.
+
+Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$CSCS_USERNAME@nidxxxxxx` (and __not__ `[clariden][$CSCS_USERNAME@clariden-lnxxx]`. Run:
+
+```
+# CSCS job node
+
+nvidia-smi
+```
+
+to make sure you have 4 GPUs and that you have the driver installed.
+
+Once you are done with the job. Type `exit` to exit the terminal to exit the terminal. This will cancel your job.
 
 ### Non-interactive job
 
-On 
+To launch a non-interactive job, you need to create a sbatch script. Create a file called `sbatch_train.sh`:
+
+```
+#!/bin/bash
+#SBATCH --job-name demo-job
+#SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out
+#SBATCH --error /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.err
+#SBATCH --nodes 1         # number of Nodes
+#SBATCH --ntasks-per-node 1     # number of MP tasks. IMPORTANT: torchrun represents just 1 Slurm task
+#SBATCH --gres gpu:4        # Number of GPUs
+#SBATCH --cpus-per-task 288     # number of CPUs per task.
+#SBATCH --time 0:59:59       # maximum execution time (DD-HH:MM:SS)
+#SBATCH --environment /users/$CSCS_USERNAME/.edf/multimodal.toml
+#SBATCH -A a127
+
+export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/wandb
+export WANDB_MODE="offline"
+export HF_TOKEN=<insert your token>
+
+PRELUDE="cd /users/$CSCS_USERNAME/meditron/multimodal/MultiMeditron/ && source setup.sh"
+
+export CUDA_LAUNCH_BLOCKING=1
+echo "START TIME: $(date)"
+# auto-fail on any errors in this script
+set -eo pipefail
+# logging script's variables/commands for future debug needs
+set -x
+######################
+### Set enviroment ###
+######################
+GPUS_PER_NODE=4
+echo "NODES: $SLURM_NNODES"
+######## Args ########
+export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf_home
+
+######################
+######################
+#### Set network #####
+######################
+MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+MASTER_PORT=6200
+######################
+# note that we don't want to interpolate `\$SLURM_PROCID` till `srun` since otherwise all nodes will get
+# 0 and the launcher will hang
+#
+# same goes for `\$(hostname -s|tr -dc '0-9')` - we want it to interpolate at `srun` time
+
+LAUNCHER="
+  torchrun \
+  --nproc_per_node $GPUS_PER_NODE \
+  --nnodes $SLURM_NNODES \
+  --node_rank \$SLURM_PROCID \
+  --rdzv_endpoint $MASTER_ADDR:$MASTER_PORT \
+  --rdzv_backend c10d \
+  --max_restarts 0 \
+  --tee 3 \
+  "
+
+export CMD="$LAUNCHER train.py --config config/config_alignment.yaml"
+
+echo $CMD
+
+# srun error handling:
+# --wait=60: wait 60 sec after the first task terminates before terminating all remaining tasks
+SRUN_ARGS=" \
+  --cpus-per-task $SLURM_CPUS_PER_TASK \
+  --jobid $SLURM_JOB_ID \
+  --wait 60 \
+  -A a127 \
+  --reservation=sai-a127
+  "
+# bash -c is needed for the delayed interpolation of env vars to work
+srun $SRUN_ARGS bash -c "$PRELUDE && $CMD"
+echo "END TIME: $(date)"
+```
+
+Make sure to replace all the `$CSCS_USERNAME` by your username and the `$HF_TOKEN` with your huggingface token. Pay attention to the following parameters:
+
+- `#SBATCH --job-name demo-job` sets the job name to `demo-job`
+- `#SBATCH --nodes 1` means that we are claiming one node (of 4 GPUs). You should increase this if you are launching bigger jobs
+- `#SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out` and `#SBATCH --error /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.err` mean that this will create a folder `/users/$CSCS_USERNAME/meditron/reports` that stores all the job logs
+- Note that here, we execute a training of MultiMeditron with `config/config_alignment.yaml`, thus you need to make sure that the paths of the dataset are correct
+- Note that the part which follows the `#SBATCH` commands will be executed on every node
+
+To queue your job, run:
+
+```
+# CSCS login node
+
+sbatch sbatch_train.sh
+```
+ 
+
+You can check if your job has been allocated GPUs by running:
+
+```
+# CSCS login node
+
+squeue --me
+```
+This command gives you the `JOBID` of the job you have launched
+
+Once the job enters the `R` state (for running), the job is running. You can check the logs of your job by going into the `reports` directory:
+
+```
+# Login node
+
+cd /users/$CSCS_USERNAME/meditron/reports/
+tail -f R-%x.%j.err
+```
+
+where you need to replace `R-%x.%j.err` by the actual report name.
+
+
+You can either let the job finishes or cancels the job.
+
+```
+# Login node
+
+scancel $JOBID
+```
+
+where `$JOBID`is the `JOBID` that you get when running `squeue --me`
+
