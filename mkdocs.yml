@@ -15,10 +15,14 @@ nav:
   - Home: index.md
   - Getting started: gettingstarted.md
   - Projects: projects.md
-  - Connecting to clusters: 
+  - Clusters documentation: 
     - Overview: clusters.md
-    - RCP: clusters/rcp.md
-    - CSCS: clusters/cscs.md
+    - RCP: 
+      - Connecting to the RCP: clusters/rcp.md
+      - Building Docker image for the RCP: clusters/rcp_docker.md
+    - CSCS: 
+      - Connecting to the CSCS: clusters/cscs.md
+      - Building image for the CSCS: clusters/cscs_docker.md
   - Contributing: contributing.md
   - About: about.md
 

@@ -162,7 +162,7 @@ runai submit \
 Explanation:
 
 * `name` is the name of the job
-* `image` is the link to the docker image that will be attached to the cluster
+* `image` is the link to the docker image that will be attached to the cluster. **Please note that you may need to change the image path if you pushed your image on another link. See [Building Docker image for the RCP](rcp_docker.md)**
 * `pvc` determines which scratch will be mounted to the job. The argument is of the form: `name_of_the_scratch:/mount/path/to/scratch`. Here the we are mounting the scratch named `light-scratch` to the local path `/mloscratch` **This is part may cause an error because of the LIGHT migration** 
 * `gpu` is the number of GPU that you want to claim for this job (larger amount of GPU will be harder to get as ressources are limited)
 
