@@ -1,0 +1,1320 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../rcp_docker/">
+      
+      
+        <link rel="next" href="../cscs_docker/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Connecting to the CSCS - LiGHT documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#connecting-to-cscs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="LiGHT documentation" class="md-header__button md-logo" aria-label="LiGHT documentation" data-md-component="logo">
+      
+  <img src="../../assets/light_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LiGHT documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Connecting to the CSCS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../gettingstarted/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Clusters documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="LiGHT documentation" class="md-nav__button md-logo" aria-label="LiGHT documentation" data-md-component="logo">
+      
+  <img src="../../assets/light_logo.png" alt="logo">
+
+    </a>
+    LiGHT documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gettingstarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Clusters documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Clusters documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    RCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            RCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting to the RCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rcp_docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building Docker image for the RCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    CSCS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            CSCS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Connecting to the CSCS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting to the CSCS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pre-setup-access-to-the-cscs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-setup (access to the CSCS)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-to-the-login-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to the login node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-your-ssh-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup your ssh config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Github
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-personal-folder-in-the-capstor-partition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a personal folder in the capstor partition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-the-environment-on-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup the environment on the cluster
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launching-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launching job
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Launching job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-interactive-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-interactive job
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cscs_docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Building image for the CSCS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="connecting-to-cscs">Connecting to CSCS</h1>
+<h2 id="pre-setup-access-to-the-cscs">Pre-setup (access to the CSCS)</h2>
+<p>Please ask Michael or Annie to add you to the CSCS project. Once you have been added, check your mail for the invitation link. You will to have to create an account.</p>
+<h2 id="connect-to-the-login-node">Connect to the login node</h2>
+<p>To connect to the login node, you will need to refresh your key every 24 hours. To refresh your keys, you need to execute the following script. Make sure to replace <code>$CSCS_USERNAME</code> with your CSCS username and the <code>$CSCS_PASSWORD</code> with your CSCS password. </p>
+<pre><code>#!/bin/bash
+
+# This script sets the environment properly so that a user can access CSCS
+# login nodes via ssh. 
+
+#    Copyright (C) 2023, ETH Zuerich, Switzerland
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+#
+#    AUTHORS Massimo Benini
+
+
+USERNAME=$CSCS_USERNAME
+PASSWORD=$CSCS_PASSWORD
+#read -p &quot;Username : &quot; USERNAME
+#read -s -p &quot;Password: &quot; PASSWORD
+
+function ProgressBar {
+# Process data
+    let _progress=(${1}*100/${2}*100)/100
+    let _done=(${_progress}*4)/10
+    let _left=40-$_done
+# Build progressbar string lengths
+    _fill=$(printf &quot;%${_done}s&quot;)
+    _empty=$(printf &quot;%${_left}s&quot;)
+
+# 1.2 Build progressbar strings and print the ProgressBar line
+# 1.2.1 Output example:
+# 1.2.1.1 Progress : [########################################] 100%
+printf &quot;\rSetting the environment : [${_fill// /#}${_empty// /-}] ${_progress}%%&quot;
+}
+
+#Variables
+_start=1
+#This accounts as the &quot;totalState&quot; variable for the ProgressBar function
+_end=100
+
+#Params
+MFA_KEYS_URL=&quot;https://sshservice.cscs.ch/api/v1/auth/ssh-keys/signed-key&quot;
+
+#Detect OS
+OS=&quot;$(uname)&quot;
+case &quot;${OS}&quot; in
+  'Linux')
+    OS='Linux'
+    ;;
+  'FreeBSD')
+    OS='FreeBSD'
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    ;;
+  'Darwin')
+    OS='Mac'
+    ;;
+  *) ;;
+esac
+
+#OS validation
+if [ &quot;${OS}&quot; != &quot;Mac&quot; ] &amp;&amp; [ &quot;${OS}&quot; != &quot;Linux&quot; ]; then
+  echo &quot;This script works only on Mac-OS or Linux. Abording.&quot;
+  exit 1
+fi
+
+#Read Inputs
+echo
+read -s -p &quot;Enter OTP (6-digit code): &quot; OTP
+echo
+
+if [ -z &quot;${PASSWORD}&quot; ]; then
+    echo &quot;Password is empty.&quot;
+    exit 1
+fi
+
+if ! [[ &quot;${OTP}&quot; =~ ^[[:digit:]]{6} ]]; then
+    echo &quot;OTP is not valid, OTP must contains only six digits.&quot;
+    exit 1
+fi
+
+ProgressBar 25 &quot;${_end}&quot;
+echo &quot;  Authenticating to the SSH key service...&quot;
+
+HEADERS=(-H &quot;Content-Type: application/json&quot; -H &quot;accept: application/json&quot;)
+KEYS=$(curl -s -S --ssl-reqd \
+    &quot;${HEADERS[@]}&quot; \
+    -d &quot;{\&quot;username\&quot;: \&quot;$USERNAME\&quot;, \&quot;password\&quot;: \&quot;$PASSWORD\&quot;, \&quot;otp\&quot;: \&quot;$OTP\&quot;}&quot; \
+    &quot;$MFA_KEYS_URL&quot;)
+
+if [ $? != 0 ]; then
+    exit 1
+fi
+
+ProgressBar 50 &quot;${_end}&quot;
+echo &quot;  Retrieving the SSH keys...&quot;
+
+DICT_KEY=$(echo ${KEYS} | cut -d \&quot; -f 2)
+if [ &quot;${DICT_KEY}&quot; == &quot;payload&quot; ]; then
+   MESSAGE=$(echo ${KEYS} | cut -d \&quot; -f 6)
+   ! [ -z &quot;${MESSAGE}&quot; ] &amp;&amp; echo &quot;${MESSAGE}&quot;
+   echo &quot;Error fetching the SSH keys. Aborting.&quot;
+   exit 1
+fi
+
+PUBLIC=$(echo ${KEYS} | cut -d \&quot; -f 4)
+PRIVATE=$(echo ${KEYS} | cut -d \&quot; -f 8)
+
+#Check if keys are empty:
+if [ -z &quot;${PUBLIC}&quot; ] || [ -z &quot;${PRIVATE}&quot; ]; then
+    echo &quot;Error fetching the SSH keys. Aborting.&quot;
+    exit 1
+fi
+
+ProgressBar 75 &quot;${_end}&quot;
+echo &quot;  Setting up the SSH keys into your home folder...&quot;
+
+#Check ~/.ssh folder and store the keys
+echo ${PUBLIC} | awk '{gsub(/\\n/,&quot;\n&quot;)}1' &gt; ~/.ssh/cscs-key-cert.pub || exit 1
+echo ${PRIVATE} | awk '{gsub(/\\n/,&quot;\n&quot;)}1' &gt; ~/.ssh/cscs-key || exit 1
+
+#Setting permissions:
+chmod 644 ~/.ssh/cscs-key-cert.pub || exit 1
+chmod 600 ~/.ssh/cscs-key || exit 1
+
+#Format the keys:
+if [ &quot;${OS}&quot; = &quot;Mac&quot; ]
+then
+  sed -i '' -e '$ d' ~/.ssh/cscs-key-cert.pub || exit 1
+  sed -i '' -e '$ d' ~/.ssh/cscs-key || exit 1
+else [ &quot;${OS}&quot; = &quot;Linux&quot; ]
+  sed '$d' ~/.ssh/cscs-key-cert.pub || exit 1
+  sed '$d' ~/.ssh/cscs-key || exit 1
+fi
+
+ProgressBar 100 &quot;${_end}&quot;
+echo &quot;  Completed.&quot;
+
+exit_code_passphrase=1
+read -n 1 -p &quot;Do you want to add a passphrase to your key? [y/n] (Default y) &quot; reply; 
+if [ &quot;$reply&quot; != &quot;&quot; ];
+ then echo;
+fi
+if [ &quot;$reply&quot; = &quot;${reply#[Nn]}&quot; ]; then
+      while [ $exit_code_passphrase != 0 ]; do
+        ssh-keygen -f ~/.ssh/cscs-key -p
+        exit_code_passphrase=$?
+      done
+fi
+
+if (( $exit_code_passphrase == 0 ));
+  then
+    SUBSTRING=&quot;, using the passphrase you have set:&quot;;
+  else
+     SUBSTRING=&quot;:&quot;;
+fi     
+
+eval `ssh-agent -s`
+ssh-add -t 1d ~/.ssh/cscs-key
+</code></pre>
+<p>We strongly suggest to store this script in a file as you will have to execute it every day. If you don't want to have your login ID stored in a script, you can comment out the lines:</p>
+<pre><code>#read -p &quot;Username : &quot; USERNAME
+#read -s -p &quot;Password: &quot; PASSWORD
+</code></pre>
+<p>and remove the lines:</p>
+<pre><code>USERNAME=$CSCS_USERNAME
+PASSWORD=$CSCS_PASSWORD
+</code></pre>
+<h2 id="setup-your-ssh-config">Setup your ssh config</h2>
+<p>Add the following lines to the <code>~/.ssh/config</code> file:</p>
+<pre><code>Host ela
+    HostName ela.cscs.ch
+    User $CSCS_USERNAME
+    ForwardAgent yes
+    ForwardX11 yes
+    forwardX11Trusted yes
+    IdentityFile ~/.ssh/cscs-key
+
+
+Host todi
+    HostName todi.cscs.ch
+    User $CSCS_USERNAME
+    ProxyJump ela
+    ForwardAgent yes
+    ForwardX11 yes
+    forwardX11Trusted yes
+    IdentityFile ~/.ssh/cscs-key
+
+Host clariden
+    HostName clariden.cscs.ch
+    User $CSCS_USERNAME
+    ProxyJump ela
+    ForwardAgent yes
+    ForwardX11 yes
+    forwardX11Trusted yes
+    IdentityFile ~/.ssh/cscs-key
+</code></pre>
+<p>To connect to the cluster, run the following:</p>
+<pre><code># Your terminal
+
+ssh clariden
+</code></pre>
+<p>This opens a terminal on the CSCS login node. </p>
+<h2 id="setup-github">Setup Github</h2>
+<p>To operate on private repositories on GitHub. You can either generate a SSH key pairs or use a GitHub personal access token (GitHub PAT). We recommand doing the second option but both options are viable.</p>
+<p>To generate a GitHub PAT, follow those <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">instructions</a>. Make sure that this PAT is stored somewhere</p>
+<p>For this tutorial, we are gonna use the <code>MultiMeditron</code> training pipeline setup. Clone the MultiMeditron repository in your user directory:</p>
+<pre><code># CSCS login node
+
+mkdir /users/$CSCS_USERNAME/meditron
+cd /users/$CSCS_USERNAME/meditron
+
+git clone https://github.com/OpenMeditron/MultiMeditron.git
+</code></pre>
+<p>When GitHub asks for your password, input the PAT that you have generated in this step.</p>
+<h2 id="create-a-personal-folder-in-the-capstor-partition">Create a personal folder in the capstor partition</h2>
+<pre><code># CSCS login node
+
+mkdir /capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME
+</code></pre>
+<p>This personal folder on the capstor will be mainly used to store your huggingface home and your big files that don't fit in your users personal folder</p>
+<h2 id="setup-the-environment-on-the-cluster">Setup the environment on the cluster</h2>
+<blockquote>
+<p><em><strong>IMPORTANT NOTE</strong>:</em> NEVER RUN ANY COMPUTE JOB ON THE LOGIN NODE (or else you will slow down everyone on the cluster). THE LOGIN NODE SHOULD ONLY BE USED TO SCHEDULE JOB.</p>
+</blockquote>
+<p>The terminal will spawn you into the <code>/users/$CSCS_USERNAME</code> directory.</p>
+<p>When running job, you will need to execute your job inside docker images. This is done by using <code>.toml</code> files that specify which docker image, environment variables are gonne be set when running the job. Create a folder <code>.edf</code> in <code>/users/$CSCS_USERNAME</code>:</p>
+<pre><code># CSCS login node
+
+mkdir /users/$CSCS_USERNAME/.edf
+</code></pre>
+<p>Create a <code>.edf/multimodal.toml</code> file:</p>
+<pre><code>image = &quot;/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest.sqsh&quot;
+mounts = [&quot;/capstor&quot;, &quot;/iopsstor&quot;, &quot;/users&quot;]
+
+writable = true
+
+workdir = &quot;/users/$CSCS_USERNAME/meditron/MultiMeditron&quot;
+
+[annotations]
+com.hooks.aws_ofi_nccl.enabled = &quot;true&quot;
+com.hooks.aws_ofi_nccl.variant = &quot;cuda12&quot;
+
+[env]
+CUDA_CACHE_DISABLE = &quot;1&quot;
+NCCL_NET = &quot;AWS Libfabric&quot;
+NCCL_CROSS_NIC = &quot;1&quot;
+NCCL_NET_GDR_LEVEL = &quot;PHB&quot;
+FI_CXI_DISABLE_HOST_REGISTER = &quot;1&quot;
+FI_MR_CACHE_MONITOR = &quot;userfaultfd&quot;
+FI_CXI_DEFAULT_CQ_SIZE = &quot;131072&quot;
+FI_CXI_DEFAULT_TX_SIZE = &quot;32768&quot;
+FI_CXI_RX_MATCH_MODE = &quot;software&quot;
+FI_CXI_SAFE_DEVMEM_COPY_THRESHOLD = &quot;16777216&quot;
+FI_CXI_COMPAT = &quot;0&quot;
+</code></pre>
+<p>Notice 2 things:</p>
+<ul>
+<li>We specify the path to the <code>.sqsh</code> file in the <code>image</code> attribute. This is the image used by the job that stores all of the dependencies.</li>
+<li>We specify the path to the MultiMeditron repo in the <code>workdir</code> attribute. This is the directory where we spawn when the job is launched.</li>
+</ul>
+<p>Note that for other types of job, you will probably require a different image and a different working directory.</p>
+<h2 id="launching-job">Launching job</h2>
+<p>There are 2 types of job that you can launch:</p>
+<ul>
+<li>Interactive using <code>srun</code> (which gives you a terminal)</li>
+<li>Non-interactive using <code>sbatch</code> (which schedule a job)</li>
+</ul>
+<h3 id="interactive-job">Interactive job</h3>
+<p>On the login node, you can launch an interactive job by executing the following command:</p>
+<pre><code>srun --time=1:29:59 --partition debug -A a127 --environment=/users/$CSCS_USERNAME/.edf/multimodal.toml --pty bash
+</code></pre>
+<p>Here is a breakdown of the command:</p>
+<ul>
+<li><code>--time</code> is the maximum running time of the job (here, the job runs for 1h30 before it gets killed)</li>
+<li>
+<p><code>--partition debug</code> is the node partition in which the job executed. As of 14/08/2025, there are 3 partitions:</p>
+<ul>
+<li><code>normal</code>: with a maximum running time of 12 hours and no limit on the number of distributed nodes. This partition is the partition used for non-interactive jobs and long interactive jobs</li>
+<li><code>debug</code>: with a maximum running time of 1h30 with only one node. This partition is meant for interactive jobs</li>
+<li><code>xfer</code>: this partition is meant for data transfer and doesn't claim any GPU</li>
+</ul>
+</li>
+</ul>
+<p>To check if you have been allocated a node, run the following command in another terminal:</p>
+<pre><code># CSCS login node
+
+squeue --me --start
+</code></pre>
+<p>This command will give you a dynamic estimation of the scheduled time (may change as people pass you in the priority queue). Note that this command doesn't output anything if your job has been allocated.</p>
+<p>Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your <code>bash prompt</code> is of the form <code>$CSCS_USERNAME@nidxxxxxx</code> (and <strong>not</strong> <code>[clariden][$CSCS_USERNAME@clariden-lnxxx]</code>. Run:</p>
+<pre><code># CSCS job node
+
+nvidia-smi
+</code></pre>
+<p>to make sure you have 4 GPUs and that you have the driver installed.</p>
+<p>Once you are done with the job. Type <code>exit</code> to exit the terminal to exit the terminal. This will cancel your job.</p>
+<h3 id="non-interactive-job">Non-interactive job</h3>
+<p>To launch a non-interactive job, you need to create a sbatch script. Create a file called <code>sbatch_train.sh</code>:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name demo-job
+#SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out
+#SBATCH --error /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.err
+#SBATCH --nodes 1         # number of Nodes
+#SBATCH --ntasks-per-node 1     # number of MP tasks. IMPORTANT: torchrun represents just 1 Slurm task
+#SBATCH --gres gpu:4        # Number of GPUs
+#SBATCH --cpus-per-task 288     # number of CPUs per task.
+#SBATCH --time 0:59:59       # maximum execution time (DD-HH:MM:SS)
+#SBATCH --environment /users/$CSCS_USERNAME/.edf/multimodal.toml
+#SBATCH -A a127
+
+export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/wandb
+export WANDB_MODE=&quot;offline&quot;
+export HF_TOKEN=&lt;insert your token&gt;
+
+PRELUDE=&quot;cd /users/$CSCS_USERNAME/meditron/multimodal/MultiMeditron/ &amp;&amp; source setup.sh&quot;
+
+export CUDA_LAUNCH_BLOCKING=1
+echo &quot;START TIME: $(date)&quot;
+# auto-fail on any errors in this script
+set -eo pipefail
+# logging script's variables/commands for future debug needs
+set -x
+######################
+### Set enviroment ###
+######################
+GPUS_PER_NODE=4
+echo &quot;NODES: $SLURM_NNODES&quot;
+######## Args ########
+export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf_home
+
+######################
+######################
+#### Set network #####
+######################
+MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+MASTER_PORT=6200
+######################
+# note that we don't want to interpolate `\$SLURM_PROCID` till `srun` since otherwise all nodes will get
+# 0 and the launcher will hang
+#
+# same goes for `\$(hostname -s|tr -dc '0-9')` - we want it to interpolate at `srun` time
+
+LAUNCHER=&quot;
+  torchrun \
+  --nproc_per_node $GPUS_PER_NODE \
+  --nnodes $SLURM_NNODES \
+  --node_rank \$SLURM_PROCID \
+  --rdzv_endpoint $MASTER_ADDR:$MASTER_PORT \
+  --rdzv_backend c10d \
+  --max_restarts 0 \
+  --tee 3 \
+  &quot;
+
+export CMD=&quot;$LAUNCHER train.py --config config/config_alignment.yaml&quot;
+
+echo $CMD
+
+# srun error handling:
+# --wait=60: wait 60 sec after the first task terminates before terminating all remaining tasks
+SRUN_ARGS=&quot; \
+  --cpus-per-task $SLURM_CPUS_PER_TASK \
+  --jobid $SLURM_JOB_ID \
+  --wait 60 \
+  -A a127 \
+  --reservation=sai-a127
+  &quot;
+# bash -c is needed for the delayed interpolation of env vars to work
+srun $SRUN_ARGS bash -c &quot;$PRELUDE &amp;&amp; $CMD&quot;
+echo &quot;END TIME: $(date)&quot;
+</code></pre>
+<p>Make sure to replace all the <code>$CSCS_USERNAME</code> by your username and the <code>$HF_TOKEN</code> with your huggingface token. Pay attention to the following parameters:</p>
+<ul>
+<li><code>#SBATCH --job-name demo-job</code> sets the job name to <code>demo-job</code></li>
+<li><code>#SBATCH --nodes 1</code> means that we are claiming one node (of 4 GPUs). You should increase this if you are launching bigger jobs</li>
+<li><code>#SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out</code> and <code>#SBATCH --error /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.err</code> mean that this will create a folder <code>/users/$CSCS_USERNAME/meditron/reports</code> that stores all the job logs</li>
+<li>Note that here, we execute a training of MultiMeditron with <code>config/config_alignment.yaml</code>, thus you need to make sure that the paths of the dataset are correct</li>
+<li>Note that the part which follows the <code>#SBATCH</code> commands will be executed on every node</li>
+</ul>
+<p>To queue your job, run:</p>
+<pre><code># CSCS login node
+
+sbatch sbatch_train.sh
+</code></pre>
+<p>You can check if your job has been allocated GPUs by running:</p>
+<pre><code># CSCS login node
+
+squeue --me
+</code></pre>
+<p>This command gives you the <code>JOBID</code> of the job you have launched</p>
+<p>Once the job enters the <code>R</code> state (for running), the job is running. You can check the logs of your job by going into the <code>reports</code> directory:</p>
+<pre><code># Login node
+
+cd /users/$CSCS_USERNAME/meditron/reports/
+tail -f R-%x.%j.err
+</code></pre>
+<p>where you need to replace <code>R-%x.%j.err</code> by the actual report name.</p>
+<p>You can either let the job finishes or cancels the job.</p>
+<pre><code># Login node
+
+scancel $JOBID
+</code></pre>
+<p>where <code>$JOBID</code>is the <code>JOBID</code> that you get when running <code>squeue --me</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.path", "navigation.tabs", "navigation.expand", "toc.integrate"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
