@@ -128,7 +128,7 @@ The RCP is organized into a [3 level hierarchy](https://wiki.rcp.epfl.ch/en/home
 ```bash
 # Your terminal
 
-runai config cluster rcp-caas
+runai config cluster rcp-caas-prod
 runai login
 runai list project
 runai config project light-$GASPAR
