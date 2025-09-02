@@ -159,6 +159,8 @@ runai submit \
   -- sleep infinity
 ```
 
+> Note: If you have issue with the job not being launched (after doing a `describe`), ensure that there is such an image in [the registry](registry.rcp.epfl.ch). You can build your image following the docker tutorial.
+
 Explanation:
 
 * `name` is the name of the job
