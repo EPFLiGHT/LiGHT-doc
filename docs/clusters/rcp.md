@@ -128,7 +128,7 @@ The RCP is organized into a [3 level hierarchy](https://wiki.rcp.epfl.ch/en/home
 ```bash
 # Your terminal
 
-runai config cluster rcp-caas
+runai config cluster rcp-caas-prod
 runai login
 runai list project
 runai config project light-$GASPAR
@@ -158,6 +158,8 @@ runai submit \
   --gpu 1 \
   -- sleep infinity
 ```
+
+> Note: If you have issue with the job not being launched (after doing a `describe`), ensure that there is such an image in [the registry](registry.rcp.epfl.ch). You can build your image following the docker tutorial.
 
 Explanation:
 
