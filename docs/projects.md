@@ -10,7 +10,7 @@ TODO
 
   2. Meditron Reasoning
 
-  TODO
+  This project aims to improve our training pipeline by integrating novel reinforcement learning approaches, notably using GRPO algorithms. This is the continuation of a previous project conducted in this area, and we plan to expand the existing work to enhance our project performances (add MultiMeditron for multi-modal reasoning).
 
   3. Meditron Safety
 
@@ -35,3 +35,4 @@ TODO
 ## 4. HIC-Lab AI Bootcamp
 
 Very cool project about teaching the basics of AI applied to healthcare. The target audience is healthcare workers and computer scientists in Rwanda. Our work in LiGHT is to improve the content of the bootcamp so that students learn better, and mentor students there, guide them throughout their completion of the bootcamp.
+
