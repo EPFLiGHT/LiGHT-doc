@@ -14,11 +14,7 @@
 
   Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
 
-  3. Meditron Safety
-
-  TODO
-
-  4. Polyglot Meditron
+  3. Polyglot Meditron
 
   Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
 
@@ -68,5 +64,6 @@ Contact: Bryan Gotti (bryan.gotti@epfl.ch)
 Very cool project about teaching the basics of AI applied to healthcare. The target audience is healthcare workers and computer scientists in Rwanda. Our work in LiGHT is to improve the content of the bootcamp so that students learn better, and mentor students there, guide them throughout their completion of the bootcamp.
 
 Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
+
 
 
