@@ -2,31 +2,31 @@
 
 ## 1. Meditron
 
-  1. MultiMeditron
+1. MultiMeditron
 
-  This project is about making Meditron multimodal: the user can provide Meditron with medical images, in addition to text. Work is two-fold: adapting the codebase of Meditron to make it have a multimodal architecture, and making the "expert" models that process the images and make embeddings fed to Meditron.
+This project is about making Meditron multimodal: the user can provide Meditron with medical images, in addition to text. Work is two-fold: adapting the codebase of Meditron to make it have a multimodal architecture, and making the "expert" models that process the images and make embeddings fed to Meditron.
 
-  Contact: Michael Zhang (michael.zhang@epfl.ch)
+Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-  2. Fine-tuning multimodal models for the medical use
+2. Fine-tuning multimodal models for the medical use
 
-  This project aims to fine-tune generalist SOTA multimodal models (Qwen2.5 VL, gpt-oss, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
+This project aims to fine-tune generalist SOTA multimodal models (Qwen2.5 VL, gpt-oss, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
 
-  Contact: Michael Zhang (michael.zhang@epfl.ch)
+Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-  3. Meditron Reasoning
+3. Meditron Reasoning
 
-  This project aims to improve our training pipeline by integrating novel reinforcement learning approaches, notably using GRPO algorithms. This is the continuation of a previous project conducted in this area, and we plan to expand the existing work to enhance our project performances (add MultiMeditron for multi-modal reasoning).
+This project aims to improve our training pipeline by integrating novel reinforcement learning approaches, notably using GRPO algorithms. This is the continuation of a previous project conducted in this area, and we plan to expand the existing work to enhance our project performances (add MultiMeditron for multi-modal reasoning).
 
-  Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
+Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
 
-  4. Polyglot Meditron
+4. Polyglot Meditron
 
-  Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
+Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
 
-  This project aims at making Meditron models more proficient in other languages, with a focus on low-resource languages. Work is needed, since having a polyglot base model is generally not enough: popular models do not have a focus on low-resource languages, and there is also a need to make sure to teach the model non-English medical terminology.
+This project aims at making Meditron models more proficient in other languages, with a focus on low-resource languages. Work is needed, since having a polyglot base model is generally not enough: popular models do not have a focus on low-resource languages, and there is also a need to make sure to teach the model non-English medical terminology.
 
-  Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
+Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
 
 ## 2. MMORE
 
@@ -70,6 +70,7 @@ Contact: Bryan Gotti (bryan.gotti@epfl.ch)
 Very cool project about teaching the basics of AI applied to healthcare. The target audience is healthcare workers and computer scientists in Rwanda. Our work in LiGHT is to improve the content of the bootcamp so that students learn better, and mentor students there, guide them throughout their completion of the bootcamp.
 
 Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
+
 
 
 
