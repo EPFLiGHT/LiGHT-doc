@@ -46,30 +46,11 @@ Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
 
 ## 3. Moove
 
-The [moove](https://jointhemoove.org) is a collaborative platform where experts and communities co-design and validate AI models. The initiative focuses on aligning large language models with real-world standards, ensuring they are transparent, safe, and context-aware.
+The [moove](https://jointhemoove.org) is a collaborative platform where experts and communities co-design and validate AI models. The initiative focuses on aligning large language models with real-world standards, ensuring they are transparent, safe, and context-aware. It is already partnered with institutions such as CHUV, ICRC, the Gates Foundation and many hospitals around the world.
 
-On the platform, experts can:
-* Challenge AI with tough, domain-specific questions.
-* Rank and critique answers, identifying mistakes, ethical issues, and bias.
-* Improve AI outputs by rewriting them to align with professional standards.
-* Collaboratively fine-tune models (like Meditron for medicine and Legitron for law) so they adapt to institutional and humanitarian needs.
+If you want to help us make the moove even greater, don't hesitate to join!
 
-The moove is already partnered with institutions such as CHUV, ICRC, the Gates Foundation and many hospitals around the world.
-
-Here are examples of semester project opportunities:
-
-* Migrating to a secure Convex-based database for handling sensitive patient data in local server environments.
-* Broadening the platform to include non-medical experts, adapting workflows and validation mechanisms.
-* Building functionality where human experts can answer questions like LLMs, and then enabling expert voting between LLM and human responses.
-* Integrating MMORE to deliver a production-ready Retrieval-Augmented Generation (RAG) pipeline, with robust file summarization and contextualization.
-* Improving the speech-to-speech feature, making it more polished and easy to use.
-* Any other fancy idea you might have on how to improve the moove!
-
-The project is software-engineering focused:
-
-* Strong emphasis on code quality, code reviews, and GitHub pull requests.
-* Stack includes React.js (knowledge helpful, but not mandatory).
-* Work is collaborative and impactful, directly shaping how AI models are tested and aligned with human expertise.
+Note that the project is software-engineering focused.
 
 Contact: Bryan Gotti (bryan.gotti@epfl.ch)
 
@@ -85,6 +66,7 @@ Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
 LLMs are usually not deployed for humanitarian applications since they are not intentionally designed to align to humanitarian values. This project therefore aims to develop a framework / checklist for LLM development and evaluation that can be applied in the creation and testing of Humanitarian-focused LLMs.
 
 Contact: David Sasu (david.sasu@epfl.ch)
+
 
 
 
