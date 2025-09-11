@@ -2,25 +2,25 @@
 
 ## 1. Meditron
 
-1. MultiMeditron
+- MultiMeditron
 
 This project is about making Meditron multimodal: the user can provide Meditron with medical images, in addition to text. Work is two-fold: adapting the codebase of Meditron to make it have a multimodal architecture, and making the "expert" models that process the images and make embeddings fed to Meditron.
 
 Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-2. Fine-tuning multimodal models for the medical use
+- Fine-tuning multimodal models for the medical use
 
 This project aims to fine-tune generalist SOTA multimodal models (Qwen2.5 VL, gpt-oss, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
 
 Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-3. Meditron Reasoning
+- Meditron Reasoning
 
 This project aims to improve our training pipeline by integrating novel reinforcement learning approaches, notably using GRPO algorithms. This is the continuation of a previous project conducted in this area, and we plan to expand the existing work to enhance our project performances (add MultiMeditron for multi-modal reasoning).
 
 Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
 
-4. Polyglot Meditron
+- Polyglot Meditron
 
 Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
 
@@ -28,13 +28,11 @@ This project aims at making Meditron models more proficient in other languages, 
 
 Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
 
-5. Giving Meditron a voice
+- Giving Meditron a voice
 
 There are many people around the world who even though cannot read, seek healthcare information and guidance. Currently, medical LLMs, even those that are multi-modal, are usually constrained to a few languages thereby limiting their application in this particular use-case of healthcare question answering. The main objective of this project is to extend the multi-lingual speech capabilities of our Meditron model to ensure that it is more accessible to people around the world.
 
 Contact: David Sasu (david.sasu@epfl.ch)
-
-
 
 ## 2. MMORE
 
@@ -71,14 +69,10 @@ Contact: David Sasu (david.sasu@epfl.ch)
 
 Build a lightweight “answer‑or‑abstain” safety layer around Meditron for medical question answering. The system answers when confident and abstains with a brief rationale when uncertainty is high, escalating to a human reviewer. Students will choose and compare at least two uncertainty signals (for example: agreement across multiple samples or a small ensemble; probability‑based confidence/entropy with simple calibration; conformal prediction that returns small, coverage‑controlled answer sets; and/or basic out‑of‑distribution checks). Evaluation focuses on risk–coverage curves and calibration (e.g., Brier score, negative log‑likelihood), with a minimal demo UI to communicate abstentions clearly. Public datasets only (e.g., PubMedQA, MedQA/USMLE, MedMCQA, BioASQ).
 
-Contact: Tony O’Halloran (tonyohalloran2000@gmail.com
-
+Contact: Tony O’Halloran (tonyohalloran2000@gmail.com)
 
 ## 7. ProbeSuite‑Med
 
 Create a simple, pip/Colab‑friendly toolkit that “X‑rays” a medical LLM to reveal what kinds of clinical cues appear at different depths—and whether the model actually uses them. Students pick two signal families (e.g., negation/temporality; clinical concept mentions via an off‑the‑shelf biomedical tagger; or guideline/action‑step cues with a small labeled subset). Keep the model frozen: attach small classifiers to its internal states to test for the chosen signals, add basic controls (capacity limits, label shuffles), and produce clear layer maps. Optionally, run a feature‑removal/neutralization test to see if task accuracy drops, and compare internal representations before vs after a fine‑tune. Public datasets only (e.g., PubMedQA, MedQA, MedMCQA, BioASQ, MedNLI).
 
-Contact: Tony O’Halloran (tonyohalloran2000@gmail.com
-
-
-
+Contact: Tony O’Halloran (tonyohalloran2000@gmail.com)
