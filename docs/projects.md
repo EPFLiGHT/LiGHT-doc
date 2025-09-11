@@ -28,6 +28,14 @@ This project aims at making Meditron models more proficient in other languages, 
 
 Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
 
+5. Giving Meditron a voice
+
+There are many people around the world who even though cannot read, seek healthcare information and guidance. Currently, medical LLMs, even those that are multi-modal, are usually constrained to a few languages thereby limiting their application in this particular use-case of healthcare question answering. The main objective of this project is to extend the multi-lingual speech capabilities of our Meditron model to ensure that it is more accessible to people around the world.
+
+Contact: David Sasu (david.sasu@epfl.ch)
+
+
+
 ## 2. MMORE
 
 MMORE stands for Massive Multimodal Open RAG & Extraction, it is our Python library for a scalable multimodal pipeline for processing, indexing, and querying multimodal documents.
@@ -70,6 +78,14 @@ Contact: Bryan Gotti (bryan.gotti@epfl.ch)
 Very cool project about teaching the basics of AI applied to healthcare. The target audience is healthcare workers and computer scientists in Rwanda. Our work in LiGHT is to improve the content of the bootcamp so that students learn better, and mentor students there, guide them throughout their completion of the bootcamp.
 
 Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
+
+## 5. CHIT-CHAT
+1. Embedding Humanitarian Principles in LLM Development
+
+LLMs are usually not deployed for humanitarian applications since they are not intentionally designed to align to humanitarian values. This project therefore aims to develop a framework / checklist for LLM development and evaluation that can be applied in the creation and testing of Humanitarian-focused LLMs.
+
+Contact: David Sasu (david.sasu@epfl.ch)
+
 
 
 
