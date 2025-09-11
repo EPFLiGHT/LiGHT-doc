@@ -8,13 +8,19 @@
 
   Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-  2. Meditron Reasoning
+  2. Fine-tuning multimodal models for the medical use
+
+  This project aims to fine-tune generalist SOTA multimodal models (Qwen2.5 VL, gpt-oss, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
+
+  Contact: Michael Zhang (michael.zhang@epfl.ch)
+
+  3. Meditron Reasoning
 
   This project aims to improve our training pipeline by integrating novel reinforcement learning approaches, notably using GRPO algorithms. This is the continuation of a previous project conducted in this area, and we plan to expand the existing work to enhance our project performances (add MultiMeditron for multi-modal reasoning).
 
   Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
 
-  3. Polyglot Meditron
+  4. Polyglot Meditron
 
   Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
 
