@@ -2,25 +2,25 @@
 
 ## 1. Meditron
 
-- MultiMeditron
+- **MultiMeditron**
 
 This project is about making Meditron multimodal: the user can provide Meditron with medical images, in addition to text. Work is two-fold: adapting the codebase of Meditron to make it have a multimodal architecture, and making the "expert" models that process the images and make embeddings fed to Meditron.
 
 Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-- Fine-tuning multimodal models for the medical use
+- **Fine-tuning multimodal models for the medical use**
 
 This project aims to fine-tune generalist SOTA multimodal models (Qwen2.5 VL, gpt-oss, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
 
 Contact: Michael Zhang (michael.zhang@epfl.ch)
 
-- Meditron Reasoning
+- **Meditron Reasoning**
 
 This project aims to improve our training pipeline by integrating novel reinforcement learning approaches, notably using GRPO algorithms. This is the continuation of a previous project conducted in this area, and we plan to expand the existing work to enhance our project performances (add MultiMeditron for multi-modal reasoning).
 
 Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
 
-- Polyglot Meditron
+- **Polyglot Meditron**
 
 Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
 
@@ -28,11 +28,17 @@ This project aims at making Meditron models more proficient in other languages, 
 
 Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
 
-- Giving Meditron a voice
+- **Giving Meditron a voice**
 
 There are many people around the world who even though cannot read, seek healthcare information and guidance. Currently, medical LLMs, even those that are multi-modal, are usually constrained to a few languages thereby limiting their application in this particular use-case of healthcare question answering. The main objective of this project is to extend the multi-lingual speech capabilities of our Meditron model to ensure that it is more accessible to people around the world.
 
 Contact: David Sasu (david.sasu@epfl.ch)
+
+- **NeuroMeditron**
+
+NeuroMeditron develops robust multimodal models for dementia prediction using voice and typing dynamics from the mPower dataset. The project focuses on handling missing modalities through advanced fusion strategies, enabling reliable patient-level monitoring. A proof-of-concept “Neuro Expert” adapter will integrate these digital biomarkers into MultiMeditron.
+
+Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 
 ## 2. MMORE
 
@@ -76,3 +82,9 @@ Contact: Tony O’Halloran (tonyohalloran2000@gmail.com)
 Create a simple, pip/Colab‑friendly toolkit that “X‑rays” a medical LLM to reveal what kinds of clinical cues appear at different depths—and whether the model actually uses them. Students pick two signal families (e.g., negation/temporality; clinical concept mentions via an off‑the‑shelf biomedical tagger; or guideline/action‑step cues with a small labeled subset). Keep the model frozen: attach small classifiers to its internal states to test for the chosen signals, add basic controls (capacity limits, label shuffles), and produce clear layer maps. Optionally, run a feature‑removal/neutralization test to see if task accuracy drops, and compare internal representations before vs after a fine‑tune. Public datasets only (e.g., PubMedQA, MedQA, MedMCQA, BioASQ, MedNLI).
 
 Contact: Tony O’Halloran (tonyohalloran2000@gmail.com)
+
+## 8. PRISM-AI
+
+PRISM-AI leverages the PRISM dataset on pregnancy reference intervals to benchmark traditional ML/DL models against Large Language Models for risk prediction in maternal health. The project explores fine-tuning strategies and novel optimization methods (e.g., DPO/GRPO) to assess whether LLMs can provide clinically meaningful improvements over established approaches.
+
+Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
