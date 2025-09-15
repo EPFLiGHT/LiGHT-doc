@@ -1,6 +1,6 @@
 # Connecting to CSCS
 
-!!! danger inline end "DO NOT RUN ON LOGIN NODE"
+!!! danger "DO NOT RUN ON LOGIN NODE"
 
     When you establish a direct connection using `ssh` you connect to the login node. Everyone is on that node and as such **YOU SHOULD NEVER RUN ANY
 	JOBS DIRECTLY ON THE LOGIN NODE**. If you want to run a process, *like a training*, you can run it on a [dedicated allocated job](#launching-job)
