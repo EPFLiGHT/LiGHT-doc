@@ -20,6 +20,20 @@ srun --time 11:59:59 -p normal -A a127 --pty bash
 
 Make sure to put a big timeout as building docker images can take a lot of time
 
+## Configure podman storage
+
+In order to use podman on alps, you need to create a valid container storage configuration file at `$HOME/.config/containers/storage.conf`. In pratice you need to crete the following file at `/users/<USERNAME>/.config/containers/storage.conf`. 
+
+```toml
+[storage]
+driver = "overlay"
+runroot = "/dev/shm/$USER/runroot"
+graphroot = "/dev/shm/$USER/root"
+
+[storage.options.overlay]
+mount_program = "/usr/bin/fuse-overlayfs-1.13"
+```
+
 ## Building the image
 
 Create your Dockerfile and name it `Dockerfile`. For example, this is the Dockerfile used to run axolotl:
