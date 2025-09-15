@@ -78,7 +78,7 @@ chmod +r /capstor/store/cscs/swissai/a127/meditron/docker/my_custom_image.sqsh
 
 To use your new Docker image, create a new toml file in `$HOME/.edf` (in this example we name it `example.toml`):
 
-```
+```toml
 image = "/capstor/store/cscs/swissai/a127/meditron/docker/my_custom_image.sqsh"
 mounts = ["/capstor", "/iopsstor", "/users"]
 
@@ -109,7 +109,7 @@ Note the line starting with `image =`
 
 Then, to claim an interactive job with this image:
 
-```
+```bash
 srun --time=1:29:59 --partition debug -A a127 --environment=$HOME/.edf/example.toml --pty bash
 ```
 
