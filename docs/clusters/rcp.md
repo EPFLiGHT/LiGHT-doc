@@ -2,7 +2,7 @@
 
 ## 1. Pre-setup (access to scratch and cluster)
 
-Please ask [Mark](mailto:mark.wagner@epfl.ch) or [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the corresponding groups. You can check your groups at https://groups.epfl.ch/
+Please ask [Mark](mailto:mark.wagner@epfl.ch) or [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the corresponding groups (send a message on Slack to get a faster answer). You can check your groups at https://groups.epfl.ch/
 
 ## 2. Setting-up credentials
 

@@ -8,7 +8,7 @@
 
 ## Pre-setup (access to the CSCS)
 
-Please ask Michael or Annie to add you to the CSCS project. Once you have been added, check your mail for the invitation link. You will to have to create an account.
+Please ask [Michael](mailto:michael.zhang@epfl.ch) or [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the CSCS project (send a message on Slack to get a faster answer). Once you have been added, check your mail for the invitation link. You will to have to create an account.
 
 ## Connect to the login node
 
