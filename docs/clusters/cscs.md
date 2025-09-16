@@ -14,7 +14,7 @@ Please ask [Michael](mailto:michael.zhang@epfl.ch) or [Peter](mailto:peter.ahumu
 
 To connect to the login node, you will need to refresh your key every 24 hours. To refresh your keys, you need to execute the following script. Make sure to replace `$CSCS_USERNAME` with your CSCS username and the `$CSCS_PASSWORD` with your CSCS password. 
 
-```
+```bash
 #!/bin/bash
 
 # This script sets the environment properly so that a user can access CSCS
@@ -186,14 +186,14 @@ ssh-add -t 1d ~/.ssh/cscs-key
 
 We strongly suggest to store this script in a file as you will have to execute it every day. If you don't want to have your login ID stored in a script, you can comment out the lines:
 
-```
+```bash
 #read -p "Username : " USERNAME
 #read -s -p "Password: " PASSWORD
 ```
 
 and remove the lines:
 
-```
+```bash
 USERNAME=$CSCS_USERNAME
 PASSWORD=$CSCS_PASSWORD
 ```
@@ -249,7 +249,7 @@ To generate a GitHub PAT, follow those [instructions](https://docs.github.com/en
 
 For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup. Clone the MultiMeditron repository in your user directory:
 
-```
+```bash
 # CSCS login node
 
 mkdir /users/$CSCS_USERNAME/meditron
@@ -280,7 +280,7 @@ The terminal will spawn you into the `/users/$CSCS_USERNAME` directory.
 
 When running job, you will need to execute your job inside docker images. This is done by using `.toml` files that specify which docker image, environment variables are gonne be set when running the job. Create a folder `.edf` in `/users/$CSCS_USERNAME`:
 
-```
+```bash
 # CSCS login node
 
 mkdir /users/$CSCS_USERNAME/.edf
@@ -289,7 +289,7 @@ mkdir /users/$CSCS_USERNAME/.edf
 
 Create a `.edf/multimodal.toml` file:
 
-```
+```toml
 image = "/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest.sqsh"
 mounts = ["/capstor", "/iopsstor", "/users"]
 
@@ -348,7 +348,7 @@ Here is a breakdown of the command:
 
 To check if you have been allocated a node, run the following command in another terminal:
 
-```
+```bash
 # CSCS login node
 
 squeue --me --start
@@ -358,7 +358,7 @@ This command will give you a dynamic estimation of the scheduled time (may chang
 
 Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$CSCS_USERNAME@nidxxxxxx` (and __not__ `[clariden][$CSCS_USERNAME@clariden-lnxxx]`. Run:
 
-```
+```bash
 # CSCS job node
 
 nvidia-smi
@@ -372,7 +372,7 @@ Once you are done with the job. Type `exit` to exit the terminal to exit the ter
 
 To launch a non-interactive job, you need to create a sbatch script. Create a file called `sbatch_train.sh`:
 
-```
+```bash
 #!/bin/bash
 #SBATCH --job-name demo-job
 #SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out
@@ -455,7 +455,7 @@ Make sure to replace all the `$CSCS_USERNAME` by your username and the `$HF_TOKE
 - Note that the part which follows the `#SBATCH` commands will be executed on every node
 
 To queue your job, run:
-
+bash
 ```
 # CSCS login node
 
@@ -465,7 +465,7 @@ sbatch sbatch_train.sh
 
 You can check if your job has been allocated GPUs by running:
 
-```
+```bash
 # CSCS login node
 
 squeue --me
@@ -474,7 +474,7 @@ This command gives you the `JOBID` of the job you have launched
 
 Once the job enters the `R` state (for running), the job is running. You can check the logs of your job by going into the `reports` directory:
 
-```
+```bash
 # Login node
 
 cd /users/$CSCS_USERNAME/meditron/reports/
@@ -486,7 +486,7 @@ where you need to replace `R-%x.%j.err` by the actual report name.
 
 You can either let the job finishes or cancels the job.
 
-```
+```bash
 # Login node
 
 scancel $JOBID
@@ -494,3 +494,41 @@ scancel $JOBID
 
 where `$JOBID`is the `JOBID` that you get when running `squeue --me`
 
+## VSCode Connection
+
+If you want to join the modern era of computers and have something more involve than a terminal to code (unlike some people), you may want to *"connect"* your visual studio code instance directly to the cluster. This allows to directly modify the code, using the correct environment (so that it doesn't show you half the package as non existent).
+
+#### Procedure
+ - Install the [Remote development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+ - [Launch a job on the cluster](launching-job)
+   
+   You will need the vscode *CLI* installed on the job you launched.
+   
+=== "Use prebuild image"
+   You can use the image that I personally used, you can update your environment file, and use the image at `/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest_2.sqsh`. With this solution however you'll inherit from all of my python dependencies. If you want to use your own image, you can check the manual installation.
+=== "Manually install CLI"
+   If you want to use custom dependency, you'll need to manually install the *vscode cli* onto you image. To show you an example of it, here's a sample of my `Dockerfile` responsible for installing the CLI.
+   
+   ```Dockerfile hl_lines="6-11" title="Sample Dockerfile"
+   FROM michelducartier24/multimeditron-apertus
+   RUN pip install -U transformers
+   
+   RUN echo "" > /etc/pip/constraint.txt
+   
+   RUN mkdir -p /workspace/code
+   WORKDIR /workspace/code
+   RUN curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-arm64' --output vscode_cli.tar.gz
+   RUN tar -xf vscode_cli.tar.gz
+   RUN mv ./code /usr/bin
+   RUN rm -rf /workspace/code
+   ```
+
+ - Once your job has been launched with *vscode* CLI installed, it's time to run the *code tunnel*. Go to the folder of your project and run the following command
+   
+   ```bash
+   cd /path/to/my/awesome/project
+   code tunnel --name=cluster-tunnel
+   ```
+   This will prompt you to connect to your `github` account, do so.
+   
+ - Finally, open vscode locally on your computer then in the remote extension select the appropriate tunnel and that's it, you are in !
