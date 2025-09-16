@@ -505,11 +505,8 @@ If you want to join the modern era of computers and have something more involve 
    You will need the vscode *CLI* installed on the job you launched.
    
 === "Use prebuild image"
-   
    You can use the image that I personally used, you can update your environment file, and use the image at `/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest_2.sqsh`. With this solution however you'll inherit from all of my python dependencies. If you want to use your own image, you can check the manual installation.
-   
 === "Manually install CLI"
-   
    If you want to use custom dependency, you'll need to manually install the *vscode cli* onto you image. To show you an example of it, here's a sample of my `Dockerfile` responsible for installing the CLI.
    
    ```Dockerfile hl_lines="6-11" title="Sample Dockerfile"
