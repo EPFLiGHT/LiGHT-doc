@@ -256,8 +256,8 @@ mkdir /users/$CSCS_USERNAME/meditron
 cd /users/$CSCS_USERNAME/meditron
 
 # Use the HTTPS command if you used github personal access token and the SSH based if you have added SSH key-pairs
-git clone https://github.com/OpenMeditron/MultiMeditron.git
-git clone git@github.com:OpenMeditron/MultiMeditron.git
+git clone https://github.com/EPFLiGHT/MultiMeditron.git
+git clone git@github.com:EPFLiGHT/MultiMeditron.git
 ```
 
 When GitHub asks for your password, input the PAT that you have generated in this step.

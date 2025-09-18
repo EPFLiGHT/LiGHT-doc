@@ -64,7 +64,7 @@ Finally, we will execute an action that requires our identification on GitHub to
 ```bash
 # SSH terminal
 
-git clone https://github.com/OpenMeditron/MultiMeditron.git
+git clone https://github.com/EPFLiGHT/MultiMeditron.git
 ```
 If you were able to clone the repo, then your setup is correct.
 
