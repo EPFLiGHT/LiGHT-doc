@@ -249,7 +249,7 @@ To generate a GitHub PAT, follow those [instructions](https://docs.github.com/en
 
 For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup. Clone the MultiMeditron repository in your user directory:
 
-=== HTTP clone
+=== "HTTP clone"
 
     ```bash
     # CSCS login node
@@ -260,16 +260,15 @@ For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup.
     git clone https://github.com/EPFLiGHT/MultiMeditron.git
     ```
 
-=== SSH clone
+=== "SSH clone"
     ```bash
     # CSCS login node
 
     mkdir /users/$CSCS_USERNAME/meditron
     cd /users/$CSCS_USERNAME/meditron
 
-    git clone https://github.com/EPFLiGHT/MultiMeditron.git
+    git clone git@github.com:EPFLiGHT/LiGHT-doc.git
     ```
-
 
 When GitHub asks for your password, input the PAT that you have generated in this step.
 
