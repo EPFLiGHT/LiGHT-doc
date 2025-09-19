@@ -282,6 +282,11 @@ mkdir /capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME
 
 This personal folder on the capstor will be mainly used to store your huggingface home and your big files that don't fit in your users personal folder
 
+In your `~/.bashrc`, append the following line:
+```
+export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf
+```
+
 ## Setup the environment on the cluster
 
 > *__IMPORTANT NOTE__:* NEVER RUN ANY COMPUTE JOB ON THE LOGIN NODE (or else you will slow down everyone on the cluster). THE LOGIN NODE SHOULD ONLY BE USED TO SCHEDULE JOB.
@@ -324,6 +329,7 @@ FI_CXI_RX_MATCH_MODE = "software"
 FI_CXI_SAFE_DEVMEM_COPY_THRESHOLD = "16777216"
 FI_CXI_COMPAT = "0"
 ```
+
 
 Notice 2 things:
 
@@ -375,6 +381,15 @@ nvidia-smi
 ```
 
 to make sure you have 4 GPUs and that you have the driver installed.
+
+You can try to launch a training with MultiMeditron by running the following commands:
+
+```bash
+cd MultiMeditron
+pip install -e .
+torchrun --nproc-per-node 4 train.py --config config/config_alignment.yaml
+```
+
 
 Once you are done with the job. Type `exit` to exit the terminal to exit the terminal. This will cancel your job.
 
