@@ -249,16 +249,27 @@ To generate a GitHub PAT, follow those [instructions](https://docs.github.com/en
 
 For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup. Clone the MultiMeditron repository in your user directory:
 
-```bash
-# CSCS login node
+=== HTTP clone
 
-mkdir /users/$CSCS_USERNAME/meditron
-cd /users/$CSCS_USERNAME/meditron
+    ```bash
+    # CSCS login node
 
-# Use the HTTPS command if you used github personal access token and the SSH based if you have added SSH key-pairs
-git clone https://github.com/EPFLiGHT/MultiMeditron.git
-git clone git@github.com:EPFLiGHT/MultiMeditron.git
-```
+    mkdir /users/$CSCS_USERNAME/meditron
+    cd /users/$CSCS_USERNAME/meditron
+
+    git clone https://github.com/EPFLiGHT/MultiMeditron.git
+    ```
+
+=== SSH clone
+    ```bash
+    # CSCS login node
+
+    mkdir /users/$CSCS_USERNAME/meditron
+    cd /users/$CSCS_USERNAME/meditron
+
+    git clone https://github.com/EPFLiGHT/MultiMeditron.git
+    ```
+
 
 When GitHub asks for your password, input the PAT that you have generated in this step.
 
@@ -287,7 +298,7 @@ mkdir /users/$CSCS_USERNAME/.edf
 ```
 
 
-Create a `.edf/multimodal.toml` file:
+Create a `/users/$CSCS_USERNAME/.edf/multimodal.toml` file:
 
 ```toml
 image = "/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest.sqsh"
@@ -387,9 +398,7 @@ To launch a non-interactive job, you need to create a sbatch script. Create a fi
 
 export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/wandb
 export WANDB_MODE="offline"
-export HF_TOKEN=<insert your token>
-
-PRELUDE="cd /users/$CSCS_USERNAME/meditron/multimodal/MultiMeditron/ && source setup.sh"
+export HF_TOKEN=$HF_TOKEN
 
 export CUDA_LAUNCH_BLOCKING=1
 echo "START TIME: $(date)"
@@ -442,7 +451,7 @@ SRUN_ARGS=" \
   --reservation=sai-a127
   "
 # bash -c is needed for the delayed interpolation of env vars to work
-srun $SRUN_ARGS bash -c "$PRELUDE && $CMD"
+srun $SRUN_ARGS bash -c "$CMD"
 echo "END TIME: $(date)"
 ```
 
