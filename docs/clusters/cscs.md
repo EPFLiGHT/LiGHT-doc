@@ -239,7 +239,15 @@ To connect to the cluster, run the following:
 ssh clariden
 ```
 
-This opens a terminal on the CSCS login node. 
+!!! danger "DO NOT RUN ON LOGIN NODE"
+
+    This opens a terminal on the CSCS login node. You should have a terminal that looks like this:
+    ```bash
+    [mzhang@clariden-lnxxx ~]$
+    ```
+
+    **DO NOT RUN ANYTHING HEAVY WHEN YOU SEE THIS PROMPT** (training, inference, heavy download, etc.). You should always ask for a job first. Here `ln` stands for login node, this is how you know that you are on the login node. To launch a job, see [how to use an environment](#setup-the-environment-on-the-cluster) and [how to launch a job](#launching-job)
+    
 
 ## Setup Github
 
@@ -288,8 +296,6 @@ export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf
 ```
 
 ## Setup the environment on the cluster
-
-> *__IMPORTANT NOTE__:* NEVER RUN ANY COMPUTE JOB ON THE LOGIN NODE (or else you will slow down everyone on the cluster). THE LOGIN NODE SHOULD ONLY BE USED TO SCHEDULE JOB.
 
 The terminal will spawn you into the `/users/$CSCS_USERNAME` directory.
 

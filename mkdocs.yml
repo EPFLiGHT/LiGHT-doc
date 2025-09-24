@@ -12,6 +12,7 @@ site_name: LiGHT documentation
 #     - toc.integrate
 #
 # Configuration
+
 theme:
   name: material
   features:
@@ -69,7 +70,11 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -78,6 +83,9 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
+
+extra_javascript:
+  - javascripts/mermaid.mjs
 
 nav:
   - Home: index.md
@@ -89,6 +97,7 @@ nav:
       - Connecting to the RCP: clusters/rcp.md
       - Building Docker image for the RCP: clusters/rcp_docker.md
     - CSCS: 
+      - Introduction: clusters/intro_cscs.md
       - Connecting to the CSCS: clusters/cscs.md
       - Building image for the CSCS: clusters/cscs_docker.md
   - Contributing: contributing.md
