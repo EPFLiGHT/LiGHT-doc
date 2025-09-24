@@ -10,7 +10,7 @@ Contact: Michael Zhang (michael.zhang@epfl.ch)
 
 - **Fine-tuning multimodal models for the medical use**
 
-This project aims to fine-tune generalist SOTA multimodal models (Qwen2.5 VL, gpt-oss, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
+This project aims to fine-tune generalist SOTA multimodal models (Qwen3 Omni, Llava, Llama4,...) with our medical multimodal data mixture. The goal is to build the best open-weights medical multimodal model according to the standard benchmark
 
 Contact: Michael Zhang (michael.zhang@epfl.ch)
 
