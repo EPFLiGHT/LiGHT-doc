@@ -12,7 +12,7 @@ Please ask [Michael](mailto:michael.zhang@epfl.ch) or [Peter](mailto:peter.ahumu
 
 ## Connect to the login node
 
-To connect to the login node, you will need to refresh your key every 24 hours. To refresh your keys, you need to execute the following script. Make sure to replace `$CSCS_USERNAME` with your CSCS username and the `$CSCS_PASSWORD` with your CSCS password. 
+To connect to the login node, you will need to refresh your key every 24 hours. To refresh your keys, you need to execute the following script. Store the following script in a `.sh` file (e.g. `cscs_connect.sh`). Make sure to replace `$CSCS_USERNAME` with your CSCS username and the `$CSCS_PASSWORD` with your CSCS password.
 
 ```bash
 #!/bin/bash
@@ -184,7 +184,7 @@ eval `ssh-agent -s`
 ssh-add -t 1d ~/.ssh/cscs-key
 ```
 
-We strongly suggest to store this script in a file as you will have to execute it every day. If you don't want to have your login ID stored in a script, you can comment out the lines:
+You will have to execute this bash script every day. If you don't want to have your login ID stored in a script, you can comment out the lines:
 
 ```bash
 #read -p "Username : " USERNAME
@@ -419,6 +419,7 @@ To launch a non-interactive job, you need to create a sbatch script. Create a fi
 export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/wandb
 export WANDB_MODE="offline"
 export HF_TOKEN=$HF_TOKEN
+export SETUP="cd /users/$CSCS_USERNAME/meditron/multimodal/MultiMeditron && pip install -e ."
 
 export CUDA_LAUNCH_BLOCKING=1
 echo "START TIME: $(date)"
@@ -471,7 +472,7 @@ SRUN_ARGS=" \
   --reservation=sai-a127
   "
 # bash -c is needed for the delayed interpolation of env vars to work
-srun $SRUN_ARGS bash -c "$CMD"
+srun $SRUN_ARGS bash -c "$SETUP && $CMD"
 echo "END TIME: $(date)"
 ```
 
