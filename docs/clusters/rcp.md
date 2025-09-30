@@ -212,7 +212,7 @@ Once we have the container running on a node of the RCP cluster, we can attach t
 * [Kubernetes](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools)
 * [Dev containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-From the Kubernetes menu, we can see the IC and the RCP Cluster. We will enter the menu of the RCP Cluster -> Workloads -> Pods and we will see our container with a green indicator showing that it is running. Right-clicking on it will give us the option to "Attach to Visual Studio". Upon clicking, the editor will open in a new window within the container. When opening a new terminal, we will find ourselves directly in our personal folder. We can install new extensions, and they will be saved for future sessions.
+From the Kubernetes menu, we can see the IC and the RCP Cluster. We will enter the menu of the RCP Cluster -> Workloads -> Pods and we will see our container with a green indicator showing that it is running. Right-clicking on it will give us the option to "Attach to Visual Studio". Upon clicking, the editor will open in a new window within the container. We are then invited to open a folder, it should be our personal folder (`/mloscratch/users/$GASPAR`) by default, select it. When opening a new terminal, we should find ourselves directly in our personal folder, if needed we can move there with `cd` in the terminal. We can install new extensions on VS code, and they will be saved for future sessions.
 
 ### Windows (WSL connection)
 
