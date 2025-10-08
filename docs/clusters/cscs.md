@@ -557,7 +557,18 @@ If you want to join the modern era of computers and have something more involve 
     ```
 
  - Once your job has been launched with *vscode* CLI installed, it's time to run the *code tunnel*. Go to the folder of your project and run the following command
-   
+
+!!! warning "Bug in CSCS after update"
+
+    After previous maintainance of CSCS there was a bug where the following code no longer worked. This was due to multiple proxy variable being set. To fix that bug please use the following code:
+
+	```base
+	unset {http,https,no}_proxy
+	unset {HTTP,HTTPS,NO}_PROXY
+	```
+
+
+
    ```bash
    cd /path/to/my/awesome/project
    code tunnel --name=cluster-tunnel
