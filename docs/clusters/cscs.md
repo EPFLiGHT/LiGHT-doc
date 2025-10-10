@@ -275,7 +275,7 @@ For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup.
     mkdir /users/$CSCS_USERNAME/meditron
     cd /users/$CSCS_USERNAME/meditron
 
-    git clone git@github.com:EPFLiGHT/LiGHT-doc.git
+    git clone git@github.com:EPFLiGHT/MultiMeditron.git
     ```
 
 When GitHub asks for your password, input the PAT that you have generated in this step.
