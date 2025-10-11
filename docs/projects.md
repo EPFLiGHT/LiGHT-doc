@@ -71,38 +71,27 @@ LLMs are usually not deployed for humanitarian applications since they are not i
 
 Contact: David Sasu (david.sasu@epfl.ch)
 
-## 6. SafeScope for Meditron
-
-Build a lightweight “answer‑or‑abstain” safety layer around Meditron for medical question answering. The system answers when confident and abstains with a brief rationale when uncertainty is high, escalating to a human reviewer. Students will choose and compare at least two uncertainty signals (for example: agreement across multiple samples or a small ensemble; probability‑based confidence/entropy with simple calibration; conformal prediction that returns small, coverage‑controlled answer sets; and/or basic out‑of‑distribution checks). Evaluation focuses on risk–coverage curves and calibration (e.g., Brier score, negative log‑likelihood), with a minimal demo UI to communicate abstentions clearly. Public datasets only (e.g., PubMedQA, MedQA/USMLE, MedMCQA, BioASQ).
-
-Contact: Tony O’Halloran (tonyohalloran2000@gmail.com)
-
-## 7. ProbeSuite‑Med
-
-Create a simple, pip/Colab‑friendly toolkit that “X‑rays” a medical LLM to reveal what kinds of clinical cues appear at different depths—and whether the model actually uses them. Students pick two signal families (e.g., negation/temporality; clinical concept mentions via an off‑the‑shelf biomedical tagger; or guideline/action‑step cues with a small labeled subset). Keep the model frozen: attach small classifiers to its internal states to test for the chosen signals, add basic controls (capacity limits, label shuffles), and produce clear layer maps. Optionally, run a feature‑removal/neutralization test to see if task accuracy drops, and compare internal representations before vs after a fine‑tune. Public datasets only (e.g., PubMedQA, MedQA, MedMCQA, BioASQ, MedNLI).
-
-Contact: Tony O’Halloran (tonyohalloran2000@gmail.com)
-
-## 8. PRISM-AI
+## 6. PRISM-AI
 
 PRISM-AI leverages the PRISM dataset on pregnancy reference intervals to benchmark traditional ML/DL models against Large Language Models for risk prediction in maternal health. The project explores fine-tuning strategies and novel optimization methods (e.g., DPO/GRPO) to assess whether LLMs can provide clinically meaningful improvements over established approaches.
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 
-## 9. Multimodal Learning from Voice and Keyboard Dynamics for Early Alzheimer’s Diagnosis
+## 7. Multimodal Learning from Voice and Keyboard Dynamics for Early Alzheimer’s Diagnosis
 
 This project develops deep learning model to detect early Alzheimer’s disease from typing and voice signals. Students will design a multimodal models (RNNs for typing and CNN/ViT for voice) to capture motor and speech patterns linked to cognitive decline, comparing modality contributions and model interpretability.
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 
-## 10. Cross-Disease Voice Prognosis: Parkinson and ALS Audio Modeling
+## 8. Cross-Disease Voice Prognosis: Parkinson and ALS Audio Modeling
 
 Voice changes are early markers of neurodegenerative diseases. This project trains deep learning models on Parkinson’s voice recordings (mPower) and tests cross-disease generalization on ALS speech data, exploring transfer learning and shared vocal biomarkers across disorders.
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 
-## 11. Balancing Time-Series Health Data Across Diseases
+## 9. Balancing Time-Series Health Data Across Diseases
 
 This project extends the [IMBALMED method](https://www.sciencedirect.com/science/article/pii/S0895611125000382) for class balancing in time-series models (LSTM/GRU) and benchmarks it against standard techniques such as SMOTE or focal loss. Students will analyze cross-disease robustness and ensemble diversity, building a reproducible benchmark for temporal health data.
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
+
