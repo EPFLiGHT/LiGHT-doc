@@ -89,3 +89,20 @@ PRISM-AI leverages the PRISM dataset on pregnancy reference intervals to benchma
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 
+## 9. Multimodal Learning from Voice and Keyboard Dynamics for Early Alzheimer’s Diagnosis
+
+This project develops deep learning model to detect early Alzheimer’s disease from typing and voice signals. Students will design a multimodal models (RNNs for typing and CNN/ViT for voice) to capture motor and speech patterns linked to cognitive decline, comparing modality contributions and model interpretability.
+
+Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
+
+## 10. Cross-Disease Voice Prognosis: Parkinson and ALS Audio Modeling
+
+Voice changes are early markers of neurodegenerative diseases. This project trains deep learning models on Parkinson’s voice recordings (mPower) and tests cross-disease generalization on ALS speech data, exploring transfer learning and shared vocal biomarkers across disorders.
+
+Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
+
+## 11. Balancing Time-Series Health Data Across Diseases
+
+This project extends the [IMBALMED method](https://www.sciencedirect.com/science/article/pii/S0895611125000382) for class balancing in time-series models (LSTM/GRU) and benchmarks it against standard techniques such as SMOTE or focal loss. Students will analyze cross-disease robustness and ensemble diversity, building a reproducible benchmark for temporal health data.
+
+Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
