@@ -20,19 +20,15 @@
 
   Contact: Guillaume Boyé (guillaume.boye@epfl.ch)
 
-- **Polyglot Meditron**
+- **Polyglot Meditron & Giving Meditron a Voice**
 
   Speaking English is nice, most content online is in English. Having a performant LLM for medical tasks formulated in English is useful. But not enough! In low-resource settings and even in most places of the globe, people usually prefer using their first language rather than English.
 
-  This project aims at making Meditron models more proficient in other languages, with a focus on low-resource languages. Work is needed, since having a polyglot base model is generally not enough: popular models do not have a focus on low-resource languages, and there is also a need to make sure to teach the model non-English medical terminology.
-
-  Contact: Fabrice Nemo (fabrice.nemo@epfl.ch)
-
-- **Giving Meditron a voice**
-
   There are many people around the world who even though cannot read, seek healthcare information and guidance. Currently, medical LLMs, even those that are multi-modal, are usually constrained to a few languages thereby limiting their application in this particular use-case of healthcare question answering. The main objective of this project is to extend the multi-lingual speech capabilities of our Meditron model to ensure that it is more accessible to people around the world.
 
-  Contact: David Sasu (david.sasu@epfl.ch)
+  This project aims at making Meditron models more proficient in other languages, with a focus on low-resource languages. In written and spoken speech. Work is needed, since having a polyglot base model is generally not enough: popular models do not have a focus on low-resource languages, and there is also a need to make sure to teach the model non-English medical terminology.
+
+  Contact: Fabrice Nemo (fabrice.nemo@epfl.ch) & David Sasu (david.sasu@epfl.ch)
 
 - **NeuroMeditron**
 
@@ -94,4 +90,5 @@ Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 This project extends the [IMBALMED method](https://www.sciencedirect.com/science/article/pii/S0895611125000382) for class balancing in time-series models (LSTM/GRU) and benchmarks it against standard techniques such as SMOTE or focal loss. Students will analyze cross-disease robustness and ensemble diversity, building a reproducible benchmark for temporal health data.
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
+
 
