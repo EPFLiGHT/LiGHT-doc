@@ -534,9 +534,9 @@ If you want to join the modern era of computers and have something more involve 
    
    You will need the vscode *CLI* installed on the job you launched.
    
-=== "Use prebuild image"
+=== "Use prebuilt image"
 
-    You can use the image that I personally used, you can update your environment file, and use the image at `/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_code.sqsh`. With this solution however you'll inherit from all of my python dependencies. If you want to use your own image, you can check the manual installation.
+    You can use the image that I personally used, you can update your environment file, and use the image at `/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest_2.sqsh`. With this solution however you'll inherit from all of my python dependencies. If you want to use your own image, you can check the manual installation.
 
 === "Manually install CLI"
 
@@ -556,7 +556,13 @@ If you want to join the modern era of computers and have something more involve 
     RUN rm -rf /workspace/code
     ```
 
- - Once your job has been launched with *vscode* CLI installed, it's time to run the *code tunnel*. Go to the folder of your project and run the following command
+ - Once your job has been launched with *vscode* CLI installed, it's time to run the *code tunnel* **within the job**. Go to the folder of your project and run the following command
+   ```bash
+   cd /path/to/my/awesome/project
+   code tunnel --name=cluster-tunnel
+   ```
+   This will prompt you to connect to your `github` account, do so.
+
 
 !!! warning "Bug in CSCS after update"
 
@@ -566,13 +572,5 @@ If you want to join the modern era of computers and have something more involve 
 	unset {http,https,no}_proxy
 	unset {HTTP,HTTPS,NO}_PROXY
 	```
-
-
-
-   ```bash
-   cd /path/to/my/awesome/project
-   code tunnel --name=cluster-tunnel
-   ```
-   This will prompt you to connect to your `github` account, do so.
    
  - Finally, open vscode locally on your computer then in the remote extension select the appropriate tunnel and that's it, you are in !
