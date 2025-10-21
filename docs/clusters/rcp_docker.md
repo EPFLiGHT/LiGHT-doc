@@ -1,4 +1,4 @@
-# Building Docker image for the RCP
+# (Optional) Building Docker image for the RCP
 
 
 To build a Docker image for the RCP, we will use the [LiGHT cluster template](https://github.com/EPFLiGHT/LiGHT-cluster-template).
