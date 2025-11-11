@@ -13,7 +13,7 @@ ssh $GASPAR@haas001.rcp.epfl.ch
 ```
 **For this part, every command will be done from the ssh terminal**
 
-Go in the scratch directory (`/mnt/mlo/scratch`):
+Go in the scratch directory (`/mnt/light/scratch`):
 ```bash
 # SSH terminal
 
