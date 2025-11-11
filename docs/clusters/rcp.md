@@ -168,6 +168,8 @@ Explanation:
 * `pvc` determines which scratch will be mounted to the job. The argument is of the form: `name_of_the_scratch:/mount/path/to/scratch`. Here the we are mounting the scratch named `light-scratch` to the local path `/mloscratch` **This is part may cause an error because of the LIGHT migration** 
 * `gpu` is the number of GPU that you want to claim for this job (larger amount of GPU will be harder to get as ressources are limited)
 
+> Note: It is heavily recommended to save this command into a `shell` file, to easily edit it and launch jobs with `bash connect.sh` for instance. You may have two files, one for CPU-only jobs and one for GPU (make sure to give them different names). Generally you don't need more than those two. Important to know: jobs with GPUs are time limited, they are automatically shut down after 2 hours of using no GPUs, whereas there is no such limitation for CPU-only jobs.
+
 We can check the outputs of our container and the status of the job using the following commands respectively.
 ```bash
 # Your terminal
@@ -189,7 +191,10 @@ You can access your job by doing
 
 runai bash meditron-basic
 ```
-You should see a terminal opening. Enter the following command in your new terminal to ensure that you have indeed a GPU: 
+
+You should see a terminal opening. By default it redirects you to the folder `/workspace`. This folder is not persistent, it is heavily recommended to always start using the job by moving to your personal folder you made earlier, at `/mloscratch/users/$GASPAR_USER`.
+
+Enter the following command in your new terminal to ensure that you have indeed a GPU: 
 ```bash
 # Job terminal
 

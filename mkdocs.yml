@@ -95,11 +95,11 @@ nav:
     - Overview: clusters.md
     - RCP: 
       - Connecting to the RCP: clusters/rcp.md
-      - Building Docker image for the RCP: clusters/rcp_docker.md
+      - (Optional) Building Docker image for the RCP: clusters/rcp_docker.md
     - CSCS: 
       - Introduction: clusters/intro_cscs.md
       - Connecting to the CSCS: clusters/cscs.md
-      - Building image for the CSCS: clusters/cscs_docker.md
+      - (Optional) Building image for the CSCS: clusters/cscs_docker.md
   - Contributing: contributing.md
   - About: about.md
 
