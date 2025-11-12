@@ -184,8 +184,15 @@ eval `ssh-agent -s`
 ssh-add -t 1d ~/.ssh/cscs-key
 ```
 
-You will have to execute this bash script every day. If you don't want to have your login ID stored in a script, you can comment out the lines:
+You will have to execute this *bash* script every day. Warning, you are limited in the number of key you can generate by day (roughtly 5 per day) as such be mindful when trying to debug things. You should
+launch this script in `bash`, you can run the following commands
+```bash
+nano cscs-refresh.sh # update the file
+chmod +x ./cscs-refresh.sh
+bash ./cscs-refresh.sh
+```
 
+If you don't want to have your login ID stored in a script, you can comment out the lines:
 ```bash
 #read -p "Username : " USERNAME
 #read -s -p "Password: " PASSWORD
