@@ -12,7 +12,7 @@ Please ask [Michael](mailto:michael.zhang@epfl.ch) or [Peter](mailto:peter.ahumu
 
 ## Connect to the login node
 
-To connect to the login node, you will need to refresh your key every 24 hours. To refresh your keys, you need to execute the following script. Store the following script in a `.sh` file (e.g. `cscs_connect.sh`). Make sure to replace `$CSCS_USERNAME` with your CSCS username and the `$CSCS_PASSWORD` with your CSCS password.
+To connect to the login node, you will need to refresh your key every 24 hours. To refresh your keys, you need to execute the following script. Store the following script in a `.sh` file (e.g. `cscs_connect.sh`). Make sure to replace `$CSCS_USER` with your CSCS username and the `$CSCS_PASSWORD` with your CSCS password.
 
 ```bash
 #!/bin/bash
@@ -37,7 +37,7 @@ To connect to the login node, you will need to refresh your key every 24 hours. 
 #    AUTHORS Massimo Benini
 
 
-USERNAME=$CSCS_USERNAME
+USERNAME=$CSCS_USER
 PASSWORD=$CSCS_PASSWORD
 #read -p "Username : " USERNAME
 #read -s -p "Password: " PASSWORD
@@ -201,7 +201,7 @@ If you don't want to have your login ID stored in a script, you can comment out 
 and remove the lines:
 
 ```bash
-USERNAME=$CSCS_USERNAME
+USERNAME=$CSCS_USER
 PASSWORD=$CSCS_PASSWORD
 ```
 
@@ -212,7 +212,7 @@ Add the following lines to the `~/.ssh/config` file:
 ```
 Host ela
     HostName ela.cscs.ch
-    User $CSCS_USERNAME
+    User $CSCS_USER
     ForwardAgent yes
     ForwardX11 yes
     forwardX11Trusted yes
@@ -221,7 +221,7 @@ Host ela
 
 Host todi
     HostName todi.cscs.ch
-    User $CSCS_USERNAME
+    User $CSCS_USER
     ProxyJump ela
     ForwardAgent yes
     ForwardX11 yes
@@ -230,13 +230,15 @@ Host todi
 
 Host clariden
     HostName clariden.cscs.ch
-    User $CSCS_USERNAME
+    User $CSCS_USER
     ProxyJump ela
     ForwardAgent yes
     ForwardX11 yes
     forwardX11Trusted yes
     IdentityFile ~/.ssh/cscs-key
 ```
+
+Make sure to replace the `$CSCS_USER` by your real CSCS username.
 
 To connect to the cluster, run the following:
 
@@ -269,8 +271,8 @@ For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup.
     ```bash
     # CSCS login node
 
-    mkdir /users/$CSCS_USERNAME/meditron
-    cd /users/$CSCS_USERNAME/meditron
+    mkdir /users/$USER/meditron
+    cd /users/$USER/meditron
 
     git clone https://github.com/EPFLiGHT/MultiMeditron.git
     ```
@@ -279,8 +281,8 @@ For this tutorial, we are gonna use the `MultiMeditron` training pipeline setup.
     ```bash
     # CSCS login node
 
-    mkdir /users/$CSCS_USERNAME/meditron
-    cd /users/$CSCS_USERNAME/meditron
+    mkdir /users/$USER/meditron
+    cd /users/$USER/meditron
 
     git clone git@github.com:EPFLiGHT/MultiMeditron.git
     ```
@@ -292,44 +294,40 @@ When GitHub asks for your password, input the PAT that you have generated in thi
 ```
 # CSCS login node
 
-mkdir /capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME
+mkdir /capstor/store/cscs/swissai/a127/homes/$USER
 ```
 
 This personal folder on the capstor will be mainly used to store your huggingface home and your big files that don't fit in your users personal folder
 
-In your `~/.bashrc`, append the following line:
-```
-export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf
-```
-
 ## Setup the environment on the cluster
 
-The terminal will spawn you into the `/users/$CSCS_USERNAME` directory.
+The terminal will spawn you into the `/users/$USER` directory.
 
-When running job, you will need to execute your job inside docker images. This is done by using `.toml` files that specify which docker image, environment variables are gonne be set when running the job. Create a folder `.edf` in `/users/$CSCS_USERNAME`:
+When running job, you will need to execute your job inside docker images. This is done by using `.toml` files that specify which docker image, environment variables are gonne be set when running the job. Create a folder `.edf` in `/users/$USER`:
 
 ```bash
 # CSCS login node
 
-mkdir /users/$CSCS_USERNAME/.edf
+mkdir /users/$USER/.edf
 ```
 
 
-Create a `/users/$CSCS_USERNAME/.edf/multimodal.toml` file:
+Create a `/users/$USER/.edf/multimodal.toml` file:
 
 ```toml
-image = "/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest.sqsh"
+image = "michelducartier24/multimeditron-git:latest-arm64"
 mounts = ["/capstor", "/iopsstor", "/users"]
 
 writable = true
 
-workdir = "/users/$CSCS_USERNAME/meditron/MultiMeditron"
+workdir = "/users/$USER/meditron/MultiMeditron"
 
 [annotations]
 com.hooks.aws_ofi_nccl.enabled = "true"
 com.hooks.aws_ofi_nccl.variant = "cuda12"
 
 [env]
+HF_HOME = "/capstor/store/cscs/swissai/a127/homes/$USER/hf"
 CUDA_CACHE_DISABLE = "1"
 NCCL_NET = "AWS Libfabric"
 NCCL_CROSS_NIC = "1"
@@ -344,10 +342,11 @@ FI_CXI_COMPAT = "0"
 ```
 
 
-Notice 2 things:
+Notice 3 things:
 
 * We specify the path to the `.sqsh` file in the `image` attribute. This is the image used by the job that stores all of the dependencies.
 * We specify the path to the MultiMeditron repo in the `workdir` attribute. This is the directory where we spawn when the job is launched.
+* We specify the path to the HF cache in the environment variable `$HF_HOME`
 
 Note that for other types of job, you will probably require a different image and a different working directory.
 
@@ -363,7 +362,7 @@ There are 2 types of job that you can launch:
 On the login node, you can launch an interactive job by executing the following command:
 
 ```
-srun --time=1:29:59 --partition debug -A a127 --environment=/users/$CSCS_USERNAME/.edf/multimodal.toml --pty bash
+srun --time=1:29:59 --partition debug -A a127 --environment=/users/$USER/.edf/multimodal.toml --pty bash
 ```
 
 Here is a breakdown of the command:
@@ -385,7 +384,7 @@ squeue --me --start
 
 This command will give you a dynamic estimation of the scheduled time (may change as people pass you in the priority queue). Note that this command doesn't output anything if your job has been allocated.
 
-Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$CSCS_USERNAME@nidxxxxxx` (and __not__ `[clariden][$CSCS_USERNAME@clariden-lnxxx]`. Run:
+Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$USER@nidxxxxxx` (and __not__ `[clariden][$USER@clariden-lnxxx]`. Run:
 
 ```bash
 # CSCS job node
@@ -395,14 +394,18 @@ nvidia-smi
 
 to make sure you have 4 GPUs and that you have the driver installed.
 
+Make sure that once you are allocated GPUs (a.k.a your bash prompt is of the form $USER@nidxxxxxx ), that your $HF_HOME is /capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf . This is extremely important because if you run the MultiMeditron training without telling it where to download the Llama-3.1 model, it will do so in your working directory /users/$CSCS_USERNAME and you do not have enough storage for that. One way to check this is simply with echo $HF_HOME
+
 You can try to launch a training with MultiMeditron by running the following commands:
 
 ```bash
 cd MultiMeditron
+export 
 pip install -e .
 torchrun --nproc-per-node 4 train.py --config config/config_alignment.yaml
 ```
 
+Make sure [Llama 3.1](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) is not gated.
 
 Once you are done with the job. Type `exit` to exit the terminal to exit the terminal. This will cancel your job.
 
@@ -413,20 +416,20 @@ To launch a non-interactive job, you need to create a sbatch script. Create a fi
 ```bash
 #!/bin/bash
 #SBATCH --job-name demo-job
-#SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out
-#SBATCH --error /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.err
+#SBATCH --output /users/$USER/meditron/reports/R-%x.%j.out
+#SBATCH --error /users/$USER/meditron/reports/R-%x.%j.err
 #SBATCH --nodes 1         # number of Nodes
 #SBATCH --ntasks-per-node 1     # number of MP tasks. IMPORTANT: torchrun represents just 1 Slurm task
 #SBATCH --gres gpu:4        # Number of GPUs
 #SBATCH --cpus-per-task 288     # number of CPUs per task.
 #SBATCH --time 0:59:59       # maximum execution time (DD-HH:MM:SS)
-#SBATCH --environment /users/$CSCS_USERNAME/.edf/multimodal.toml
+#SBATCH --environment /users/$USER/.edf/multimodal.toml
 #SBATCH -A a127
 
-export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/wandb
+export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$USER/wandb
 export WANDB_MODE="offline"
 export HF_TOKEN=$HF_TOKEN
-export SETUP="cd /users/$CSCS_USERNAME/meditron/multimodal/MultiMeditron && pip install -e ."
+export SETUP="cd /users/$USER/meditron/multimodal/MultiMeditron && pip install -e ."
 
 export CUDA_LAUNCH_BLOCKING=1
 echo "START TIME: $(date)"
@@ -439,8 +442,9 @@ set -x
 ######################
 GPUS_PER_NODE=4
 echo "NODES: $SLURM_NNODES"
+
 ######## Args ########
-export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf_home
+export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$USER/hf
 
 ######################
 ######################
@@ -465,7 +469,7 @@ LAUNCHER="
   --tee 3 \
   "
 
-export CMD="$LAUNCHER train.py --config config/config_alignment.yaml"
+export CMD="$LAUNCHER -m multimeditron train /users/$USER/meditron/MultiMeditron/config/config_alignment.yaml"
 
 echo $CMD
 
@@ -483,11 +487,11 @@ srun $SRUN_ARGS bash -c "$SETUP && $CMD"
 echo "END TIME: $(date)"
 ```
 
-Make sure to replace all the `$CSCS_USERNAME` by your username and the `$HF_TOKEN` with your huggingface token. Pay attention to the following parameters:
+Make sure to replace all the `$USER` by your username and the `$HF_TOKEN` with your huggingface token. Pay attention to the following parameters:
 
 - `#SBATCH --job-name demo-job` sets the job name to `demo-job`
 - `#SBATCH --nodes 1` means that we are claiming one node (of 4 GPUs). You should increase this if you are launching bigger jobs
-- `#SBATCH --output /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.out` and `#SBATCH --error /users/$CSCS_USERNAME/meditron/reports/R-%x.%j.err` mean that this will create a folder `/users/$CSCS_USERNAME/meditron/reports` that stores all the job logs
+- `#SBATCH --output /users/$USER/meditron/reports/R-%x.%j.out` and `#SBATCH --error /users/$USER/meditron/reports/R-%x.%j.err` mean that this will create a folder `/users/$USER/meditron/reports` that stores all the job logs
 - Note that here, we execute a training of MultiMeditron with `config/config_alignment.yaml`, thus you need to make sure that the paths of the dataset are correct
 - Note that the part which follows the `#SBATCH` commands will be executed on every node
 
@@ -514,7 +518,7 @@ Once the job enters the `R` state (for running), the job is running. You can che
 ```bash
 # Login node
 
-cd /users/$CSCS_USERNAME/meditron/reports/
+cd /users/$USER/meditron/reports/
 tail -f R-%x.%j.err
 ```
 
