@@ -320,14 +320,14 @@ mounts = ["/capstor", "/iopsstor", "/users"]
 
 writable = true
 
-workdir = "/users/$USER/meditron/MultiMeditron"
+workdir = "/users/${USER}/meditron/MultiMeditron"
 
 [annotations]
 com.hooks.aws_ofi_nccl.enabled = "true"
 com.hooks.aws_ofi_nccl.variant = "cuda12"
 
 [env]
-HF_HOME = "/capstor/store/cscs/swissai/a127/homes/$USER/hf"
+HF_HOME = "${SCRATCH}/hf"
 CUDA_CACHE_DISABLE = "1"
 NCCL_NET = "AWS Libfabric"
 NCCL_CROSS_NIC = "1"
@@ -384,19 +384,17 @@ squeue --me --start
 
 This command will give you a dynamic estimation of the scheduled time (may change as people pass you in the priority queue). Note that this command doesn't output anything if your job has been allocated.
 
-Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$USER@nidxxxxxx` (and __not__ `[clariden][$USER@clariden-lnxxx]`. Run:
+Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$USER@nidxxxxxx` (and __not__ `[clariden][$USER@clariden-lnxxx]`. 
+
+Furthermore:
 
 ```bash
-# CSCS job node
-
-nvidia-smi
+echo $HF_HOME
 ```
 
-to make sure you have 4 GPUs and that you have the driver installed.
+Make sure that the output is `/iopsstor/scratch/cscs/$USER/hf`. This is extremely important because if you run trainings without telling it where to download the Llama-3.1 model, it will do so in your working directory `/users/$USER` and you do not have enough storage for that. 
 
-Make sure that once you are allocated GPUs (a.k.a your bash prompt is of the form $USER@nidxxxxxx ), that your $HF_HOME is /capstor/store/cscs/swissai/a127/homes/$CSCS_USERNAME/hf . This is extremely important because if you run the MultiMeditron training without telling it where to download the Llama-3.1 model, it will do so in your working directory /users/$CSCS_USERNAME and you do not have enough storage for that. One way to check this is simply with echo $HF_HOME
-
-You can try to launch a training with MultiMeditron by running the following commands:
+Launch a training with MultiMeditron by running the following commands:
 
 ```bash
 cd MultiMeditron
@@ -444,7 +442,7 @@ GPUS_PER_NODE=4
 echo "NODES: $SLURM_NNODES"
 
 ######## Args ########
-export HF_HOME=/capstor/store/cscs/swissai/a127/homes/$USER/hf
+export HF_HOME=$SCRATCH/hf
 
 ######################
 ######################

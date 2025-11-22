@@ -20,7 +20,7 @@ As a user, you need to do 2 things:
 
 Create a TOML file to define the axolotl environment. On the CSCS, create a `~/.edf/axolotl.toml`:
 
-```bash
+```toml
 
 # Put this or replace it with an updated axolotl image
 image = "/capstor/store/cscs/swissai/a127/meditron/docker/axolotl.sqsh"
@@ -34,7 +34,7 @@ com.hooks.aws_ofi_nccl.enabled = "true"
 com.hooks.aws_ofi_nccl.variant = "cuda12"
 
 [env]
-HF_HOME = "$SCRATCH/hf"
+HF_HOME = "${SCRATCH}/hf"
 CUDA_CACHE_DISABLE = "1"
 NCCL_NET = "AWS Libfabric"
 NCCL_CROSS_NIC = "1"
@@ -411,3 +411,4 @@ That's it! You have successfully launched an axolotl training job on the CSCS.
 ## Further reading
 
 - [Axolotl documentation](https://docs.axolotl.ai/)
+- [CSCS documentation](https://docs.cscs.ch/)
