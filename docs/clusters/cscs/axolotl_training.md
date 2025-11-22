@@ -313,7 +313,7 @@ Now, you can create a batch job to launch the training. Create a SLURM script `l
 #SBATCH --nodes 4               # number of Nodes
 #SBATCH --ntasks-per-node 1     # number of MP tasks. IMPORTANT: torchrun represents just 1 Slurm task
 #SBATCH --gres gpu:4        # Number of GPUs
-#SBATCH --cpus-per-task 288     # number of CPUs per task.
+#SBATCH --cpus-per-task 288     # number of CPUs per task (based on lscpu)
 #SBATCH --time 11:59:59       # maximum execution time (DD-HH:MM:SS)
 #SBATCH --environment /users/$USER/.edf/axolotl.toml
 #SBATCH -A a127
