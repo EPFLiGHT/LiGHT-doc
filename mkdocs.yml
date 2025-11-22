@@ -94,12 +94,13 @@ nav:
   - Clusters documentation: 
     - Overview: clusters.md
     - RCP: 
-      - Connecting to the RCP: clusters/rcp.md
-      - (Optional) Building Docker image for the RCP: clusters/rcp_docker.md
+      - Connecting to the RCP: clusters/rcp/rcp.md
+      - (Optional) Building Docker image for the RCP: clusters/rcp/rcp_docker.md
     - CSCS: 
-      - Introduction: clusters/intro_cscs.md
-      - Connecting to the CSCS: clusters/cscs.md
-      - (Optional) Building image for the CSCS: clusters/cscs_docker.md
+      - Introduction: clusters/cscs/intro_cscs.md
+      - (Optional) Building image for the CSCS: clusters/cscs/cscs_docker.md
+      - Connecting to the CSCS: clusters/cscs/cscs.md
+      - Launching an axolotl training: clusters/cscs/axolotl_training.md
   - Contributing: contributing.md
   - About: about.md
 
