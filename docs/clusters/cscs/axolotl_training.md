@@ -113,8 +113,6 @@ Here is an example configuration file for fine-tuning the Apertus model. Store t
 ```yaml
 
 base_model: swiss-ai/Apertus-8B-Instruct-2509
-plugins:
-  - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
 
 datasets:
   - path: /capstor/store/cscs/swissai/a127/path/to/conversations.jsonl
@@ -197,6 +195,8 @@ ddp_find_unused_parameters: true
 deepspeed: /users/$USER/meditron/axolotl_config/deepspeed.json
 
 ```
+
+Replace the `$USER` by your username in this example configuration.
 
 In this example, we only use a conversational dataset and a pretrain dataset for training.
 
