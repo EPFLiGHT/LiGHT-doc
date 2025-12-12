@@ -36,6 +36,13 @@
 
   Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 
+  
+- **Meditron-4: Clinical feedback alignment and SOTA dev**
+
+  Meditron-4 is the next iteration of Meditron, designed to close the gap between medical knowledge and guideline-faithful, clinically contextualized behavior. While Meditron-3 is now lagging behind state-of-the-art, Meditron-4 will deliver an open-source fine-tuning and evaluation pipeline and the best clinically aligned model we can produce on top of leading open medical and general base models—while also pushing small, offline-capable models (e.g., MedGemma 4B, LFM-2) for low-resource deployment.
+
+  Contact: Xavier Theimer-Lienhard (xavier.theimer-lienhard@epfl.ch)
+
 ## 2. MMORE
 
   MMORE stands for Massive Multimodal Open RAG & Extraction, it is our Python library for a scalable multimodal pipeline for processing, indexing, and querying multimodal documents.
@@ -90,5 +97,7 @@ Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
 This project extends the [IMBALMED method](https://www.sciencedirect.com/science/article/pii/S0895611125000382) for class balancing in time-series models (LSTM/GRU) and benchmarks it against standard techniques such as SMOTE or focal loss. Students will analyze cross-disease robustness and ensemble diversity, building a reproducible benchmark for temporal health data.
 
 Contact: Arianna Francesconi (arianna.francesconi@epfl.ch)
+
+
 
 
