@@ -2,9 +2,8 @@
 
 !!! danger "DO NOT RUN ON LOGIN NODE"
 
-    When you establish a direct connection using `ssh` you connect to the login node. Everyone is on that node and as such **YOU SHOULD NEVER RUN ANY
-	JOBS DIRECTLY ON THE LOGIN NODE**. If you want to run a process, *like a training*, you can run it on a [dedicated allocated job](#launching-job)
-
+    When you establish a direct connection using `ssh` you connect to the login node. Everyone is on that node and as such **YOU SHOULD NEVER RUN ANY**
+ JOBS DIRECTLY ON THE LOGIN NODE**. If you want to run a process, *like a training*, you can run it on a [dedicated allocated job](#launching-job)
 
 ## Pre-setup (access to the CSCS)
 
@@ -186,6 +185,7 @@ ssh-add -t 1d ~/.ssh/cscs-key
 
 You will have to execute this *bash* script every day. Warning, you are limited in the number of key you can generate by day (roughtly 5 per day) as such be mindful when trying to debug things. You should
 launch this script in `bash`, you can run the following commands
+
 ```bash
 nano cscs-refresh.sh # update the file
 chmod +x ./cscs-refresh.sh
@@ -193,6 +193,7 @@ bash ./cscs-refresh.sh
 ```
 
 If you don't want to have your login ID stored in a script, you can comment out the lines:
+
 ```bash
 #read -p "Username : " USERNAME
 #read -s -p "Password: " PASSWORD
@@ -216,7 +217,7 @@ Host ela
     ForwardAgent yes
     ForwardX11 yes
     forwardX11Trusted yes
-	IdentityFile ~/.ssh/cscs-key
+ IdentityFile ~/.ssh/cscs-key
 
 
 Host todi
@@ -226,7 +227,7 @@ Host todi
     ForwardAgent yes
     ForwardX11 yes
     forwardX11Trusted yes
-	IdentityFile ~/.ssh/cscs-key
+ IdentityFile ~/.ssh/cscs-key
 
 Host clariden
     HostName clariden.cscs.ch
@@ -311,7 +312,6 @@ When running job, you will need to execute your job inside docker images. This i
 mkdir /users/$USER/.edf
 ```
 
-
 Create a `/users/$USER/.edf/multimodal.toml` file:
 
 ```toml
@@ -341,7 +341,6 @@ FI_CXI_SAFE_DEVMEM_COPY_THRESHOLD = "16777216"
 FI_CXI_COMPAT = "0"
 ```
 
-
 Notice 3 things:
 
 * We specify the path to the `.sqsh` file in the `image` attribute. This is the image used by the job that stores all of the dependencies.
@@ -354,8 +353,8 @@ Note that for other types of job, you will probably require a different image an
 
 There are 2 types of job that you can launch:
 
-- Interactive using `srun` (which gives you a terminal)
-- Non-interactive using `sbatch` (which schedule a job)
+* Interactive using `srun` (which gives you a terminal)
+* Non-interactive using `sbatch` (which schedule a job)
 
 ### Interactive job
 
@@ -367,12 +366,12 @@ srun --time=1:29:59 --partition debug -A a127 --environment=/users/$USER/.edf/mu
 
 Here is a breakdown of the command:
 
-- `--time` is the maximum running time of the job (here, the job runs for 1h30 before it gets killed)
-- `--partition debug` is the node partition in which the job executed. As of 14/08/2025, there are 3 partitions:
+* `--time` is the maximum running time of the job (here, the job runs for 1h30 before it gets killed)
+* `--partition debug` is the node partition in which the job executed. As of 14/08/2025, there are 3 partitions:
 
-    - `normal`: with a maximum running time of 12 hours and no limit on the number of distributed nodes. This partition is the partition used for non-interactive jobs and long interactive jobs
-    - `debug`: with a maximum running time of 1h30 with only one node. This partition is meant for interactive jobs
-    - `xfer`: this partition is meant for data transfer and doesn't claim any GPU
+  * `normal`: with a maximum running time of 12 hours and no limit on the number of distributed nodes. This partition is the partition used for non-interactive jobs and long interactive jobs
+  * `debug`: with a maximum running time of 1h30 with only one node. This partition is meant for interactive jobs
+  * `xfer`: this partition is meant for data transfer and doesn't claim any GPU
 
 To check if you have been allocated a node, run the following command in another terminal:
 
@@ -384,7 +383,7 @@ squeue --me --start
 
 This command will give you a dynamic estimation of the scheduled time (may change as people pass you in the priority queue). Note that this command doesn't output anything if your job has been allocated.
 
-Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$USER@nidxxxxxx` (and __not__ `[clariden][$USER@clariden-lnxxx]`. 
+Once you have been allocated a job, you will have a terminal inside the allocated node. Make sure that your `bash prompt` is of the form `$USER@nidxxxxxx` (and __not__ `[clariden][$USER@clariden-lnxxx]`.
 
 Furthermore:
 
@@ -392,7 +391,7 @@ Furthermore:
 echo $HF_HOME
 ```
 
-Make sure that the output is `/iopsstor/scratch/cscs/$USER/hf`. This is extremely important because if you run trainings without telling it where to download the Llama-3.1 model, it will do so in your working directory `/users/$USER` and you do not have enough storage for that. 
+Make sure that the output is `/iopsstor/scratch/cscs/$USER/hf`. This is extremely important because if you run trainings without telling it where to download the Llama-3.1 model, it will do so in your working directory `/users/$USER` and you do not have enough storage for that.
 
 Launch a training with MultiMeditron by running the following commands:
 
@@ -487,20 +486,20 @@ echo "END TIME: $(date)"
 
 Make sure to replace all the `$USER` by your username and the `$HF_TOKEN` with your huggingface token. Pay attention to the following parameters:
 
-- `#SBATCH --job-name demo-job` sets the job name to `demo-job`
-- `#SBATCH --nodes 1` means that we are claiming one node (of 4 GPUs). You should increase this if you are launching bigger jobs
-- `#SBATCH --output /users/$USER/meditron/reports/R-%x.%j.out` and `#SBATCH --error /users/$USER/meditron/reports/R-%x.%j.err` mean that this will create a folder `/users/$USER/meditron/reports` that stores all the job logs
-- Note that here, we execute a training of MultiMeditron with `config/config_alignment.yaml`, thus you need to make sure that the paths of the dataset are correct
-- Note that the part which follows the `#SBATCH` commands will be executed on every node
+* `#SBATCH --job-name demo-job` sets the job name to `demo-job`
+* `#SBATCH --nodes 1` means that we are claiming one node (of 4 GPUs). You should increase this if you are launching bigger jobs
+* `#SBATCH --output /users/$USER/meditron/reports/R-%x.%j.out` and `#SBATCH --error /users/$USER/meditron/reports/R-%x.%j.err` mean that this will create a folder `/users/$USER/meditron/reports` that stores all the job logs
+* Note that here, we execute a training of MultiMeditron with `config/config_alignment.yaml`, thus you need to make sure that the paths of the dataset are correct
+* Note that the part which follows the `#SBATCH` commands will be executed on every node
 
 To queue your job, run:
 bash
+
 ```
 # CSCS login node
 
 sbatch sbatch_train.sh
 ```
- 
 
 You can check if your job has been allocated GPUs by running:
 
@@ -509,6 +508,7 @@ You can check if your job has been allocated GPUs by running:
 
 squeue --me
 ```
+
 This command gives you the `JOBID` of the job you have launched
 
 Once the job enters the `R` state (for running), the job is running. You can check the logs of your job by going into the `reports` directory:
@@ -521,7 +521,6 @@ tail -f R-%x.%j.err
 ```
 
 where you need to replace `R-%x.%j.err` by the actual report name.
-
 
 You can either let the job finishes or cancels the job.
 
@@ -538,11 +537,12 @@ where `$JOBID`is the `JOBID` that you get when running `squeue --me`
 If you want to join the modern era of computers and have something more involve than a terminal to code (unlike some people), you may want to *"connect"* your visual studio code instance directly to the cluster. This allows to directly modify the code, using the correct environment (so that it doesn't show you half the package as non existent).
 
 #### Procedure
- - Install the [Remote development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
- - [Launch a job on the cluster](launching-job)
-   
+
+* Install the [Remote development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+* [Launch a job on the cluster](#launching-job)
+
    You will need the vscode *CLI* installed on the job you launched.
-   
+
 === "Use prebuilt image"
 
     You can use the image that I personally used, you can update your environment file, and use the image at `/capstor/store/cscs/swissai/a127/meditron/docker/multimeditron_latest_2.sqsh`. With this solution however you'll inherit from all of my python dependencies. If you want to use your own image, you can check the manual installation.
@@ -565,21 +565,22 @@ If you want to join the modern era of computers and have something more involve 
     RUN rm -rf /workspace/code
     ```
 
- - Once your job has been launched with *vscode* CLI installed, it's time to run the *code tunnel* **within the job**. Go to the folder of your project and run the following command
+* Once your job has been launched with *vscode* CLI installed, it's time to run the *code tunnel* __within the job__. Go to the folder of your project and run the following command
+
    ```bash
    cd /path/to/my/awesome/project
    code tunnel --name=cluster-tunnel
    ```
-   This will prompt you to connect to your `github` account, do so.
 
+   This will prompt you to connect to your `github` account, do so.
 
 !!! warning "Bug in CSCS after update"
 
     After previous maintainance of CSCS there was a bug where the following code no longer worked. This was due to multiple proxy variable being set. To fix that bug please use the following code:
 
-	```base
-	unset {http,https,no}_proxy
-	unset {HTTP,HTTPS,NO}_PROXY
-	```
-   
- - Finally, open vscode locally on your computer then in the remote extension select the appropriate tunnel and that's it, you are in !
+ ```base
+ unset {http,https,no}_proxy
+ unset {HTTP,HTTPS,NO}_PROXY
+ ```
+
+* Finally, open vscode locally on your computer then in the remote extension select the appropriate tunnel and that's it, you are in !
