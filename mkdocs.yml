@@ -70,11 +70,16 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
+  - attr_list
+  - md_in_html
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -91,16 +96,15 @@ nav:
   - Home: index.md
   - Getting started: gettingstarted.md
   - Projects: projects.md
-  - Clusters documentation: 
-    - Overview: clusters.md
-    - RCP: 
-      - Connecting to the RCP: clusters/rcp/rcp.md
-      - (Optional) Building Docker image for the RCP: clusters/rcp/rcp_docker.md
-    - CSCS: 
-      - Introduction: clusters/cscs/intro_cscs.md
-      - (Optional) Building image for the CSCS: clusters/cscs/cscs_docker.md
-      - Connecting to the CSCS: clusters/cscs/cscs.md
-      - Launching an axolotl training: clusters/cscs/axolotl_training.md
+  - Clusters documentation:
+      - Overview: clusters.md
+      - RCP:
+          - Connecting to the RCP: clusters/rcp/rcp.md
+          - (Optional) Building Docker image for the RCP: clusters/rcp/rcp_docker.md
+      - CSCS:
+          - Introduction: clusters/cscs/intro_cscs.md
+          - (Optional) Building image for the CSCS: clusters/cscs/cscs_docker.md
+          - Connecting to the CSCS: clusters/cscs/cscs.md
+          - Launching an axolotl training: clusters/cscs/axolotl_training.md
   - Contributing: contributing.md
   - About: about.md
-
