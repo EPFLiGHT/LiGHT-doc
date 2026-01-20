@@ -421,7 +421,6 @@ To launch a non-interactive job, you need to create a sbatch script. Create a fi
 #SBATCH --gres gpu:4        # Number of GPUs
 #SBATCH --cpus-per-task 288     # number of CPUs per task.
 #SBATCH --time 0:59:59       # maximum execution time (DD-HH:MM:SS)
-#SBATCH --environment /users/$USER/.edf/multimodal.toml
 #SBATCH -A a127
 
 export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$USER/wandb
@@ -478,7 +477,8 @@ SRUN_ARGS=" \
   --jobid $SLURM_JOB_ID \
   --wait 60 \
   -A a127 \
-  --reservation=sai-a127
+  --reservation=sai-a127 \
+  --environment /users/$USER/.edf/multimodal.toml
   "
 # bash -c is needed for the delayed interpolation of env vars to work
 srun $SRUN_ARGS bash -c "$SETUP && $CMD"
@@ -583,3 +583,9 @@ If you want to join the modern era of computers and have something more involve 
 	```
    
  - Finally, open vscode locally on your computer then in the remote extension select the appropriate tunnel and that's it, you are in !
+
+## Further reading
+
+- Slurm documentation: https://slurm.schedmd.com/overview.html
+- CSCS documentation: https://docs.cscs.ch/
+- Open a ticket on the CSCS: https://jira.cscs.ch/plugins/servlet/desk

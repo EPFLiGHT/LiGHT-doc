@@ -315,7 +315,6 @@ Now, you can create a batch job to launch the training. Create a SLURM script `l
 #SBATCH --gres gpu:4        # Number of GPUs
 #SBATCH --cpus-per-task 288     # number of CPUs per task (based on lscpu)
 #SBATCH --time 11:59:59       # maximum execution time (DD-HH:MM:SS)
-#SBATCH --environment /users/$USER/.edf/axolotl.toml
 #SBATCH -A a127
 
 export WANDB_DIR=/capstor/store/cscs/swissai/a127/homes/$USER/wandb
@@ -377,6 +376,7 @@ SRUN_ARGS=" \
     --jobid $SLURM_JOB_ID \
     --wait 60 \
     -A a127 \
+    --environment /users/$USER/.edf/axolotl.toml \
     "
 # bash -c is needed for the delayed interpolation of env vars to work
 
