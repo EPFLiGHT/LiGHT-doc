@@ -1,4 +1,4 @@
-# (Optional) Building Docker image for the RCP
+# Building Docker image for the RCP
 
 
 To build a Docker image for the RCP, we will use the [LiGHT cluster template](https://github.com/EPFLiGHT/LiGHT-cluster-template).
@@ -31,13 +31,11 @@ This folder contains a `template.sh` file which contains all the available funct
 
 ### Creating a project on the EPFL registry (Optional)
 
-EPFL has a registry of docker images which works in a similar way to the Docker hub. This registry is used to store docker images and is only accessible through the [EPFL VPN](https://www.epfl.ch/campus/services/ressources-informatiques/network-services-reseau/acces-intranet-a-distance/clients-vpn-disponibles/).
+EPFL has a registry of docker images which works in a similar way to the Docker hub. This registry is used to store docker images and is only accessible through the EPFL network (you may use the [EPFL VPN](https://www.epfl.ch/campus/services/ressources-informatiques/network-services-reseau/acces-intranet-a-distance/clients-vpn-disponibles/)).
 
-Connect to registry.rcp.epfl.ch with the VPN. To push new docker images, you need to create a Project. At the time of this tutorial, some projects have already been created like [multimeditron](https://registry.rcp.epfl.ch/harbor/projects/316/members/summary) and you can ask Michael to add you to the project so that you can also push Docker images to this project.
+Connect to [registry.rcp.epfl.ch](https://registry.rcp.epfl.ch) with the VPN. To push new docker images, you need to create a project, by clicking on "New project". 
 
-You also have the possibility of creating your own project by clicking on "New project". 
-
-__IMPORTANT__: Beware that if you choose to create your own project, you will have to change the link of the docker images in the scripts accordingly (mainly replacing multimeditron/basic by the right path)
+__IMPORTANT__: Beware that you will have to change the link of the docker images in the scripts according to the actual path of your project (mainly replacing multimeditron/basic by the right path).
 
 ### Generating the .env file
 
@@ -94,7 +92,7 @@ IMAGE_PLATFORM=amd64-cuda
 # You can also add a suffix to the platform e.g. -jax or -pytorch if you use different images for different environments/models etc.
 ```
 
-Edit this file by setting `LAB_NAME` to the name of the project you have given in the previous step (multimeditron if you choose to push your docker images there).
+Edit this file by setting `LAB_NAME` to the name of the project you have given in the previous step, and USR and PASSWD accordingly.
 Set the `PROJECT_NAME` to a meaningful name to group the docker images that belong to the same project. Here we will choose to set it up to `basic`. Docker images with the same `PROJECT_NAME` will appear together in the `registry.rcp.epfl.ch` interface.
 
 We also change the `IMAGE_NAME` to another template for organization purpose.
@@ -102,7 +100,7 @@ We also change the `IMAGE_NAME` to another template for organization purpose.
 Edit the corresponding lines to the following lines:
 
 ```
-LAB_NAME=multimeditron # Or the name you have chosen
+LAB_NAME=multimeditron # Replace it with the name of your project
 PROJECT_NAME=basic # Optional: Change this to a more meaningful name (e.g. vllm or axolotl for instance)
 IMAGE_NAME=${LAB_NAME}/${PROJECT_NAME}
 ```
@@ -131,9 +129,19 @@ Useful commands:
 
 ### Building the user docker images
 
-Connect to people.epfl.ch and search for the user you want to build an image. You need the `Username` and the `UID` fields to build the user docker image
+Find your user id:
 
-Connect to groups.epfl.ch and search for light-scratch in "All groups". You need the `GID` field.
+```sh
+ssh $GASPAR@haas001.rcp.epfl.ch
+```
+
+Then use your EPFL password to log in, then find your UID by checking at the beginning of the output of this command:
+
+```sh
+id $GASPAR
+```
+
+Connect to [groups.epfl.ch](https://groups.epfl.ch), "Groups I'm member of" and search for light-scratch. You need the `GID` field.
 
 To build user docker images, you need to edit the `.env` file. You need to change the following attributes:
 
@@ -141,7 +149,7 @@ To build user docker images, you need to edit the `.env` file. You need to chang
 GRPID=<GID of the light-scratch>
 
 USRID=<UID of the user>
-USR=<Username of the user>
+USR=<Username of the user, the GASPAR>
 PASSWD=<Username of the user>
 ```
 
@@ -160,7 +168,7 @@ Login to the registry:
 docker login
 ```
 
-The login informations are your EPFL login
+The login informations are your EPFL credentials
 
 ```
 ./template.sh push_generic RCP
