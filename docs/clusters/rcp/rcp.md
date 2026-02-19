@@ -2,7 +2,7 @@
 
 ## 1. Pre-setup (access to scratch and cluster)
 
-Please ask [Mark](mailto:mark.wagner@epfl.ch) or [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the corresponding groups (send a message on Slack to get a faster answer). You can check your groups at https://groups.epfl.ch/
+Please ask [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the corresponding groups (send a message on Slack to get a faster answer). You can check your groups at https://groups.epfl.ch/
 
 ## 2. Setting-up credentials
 
@@ -65,7 +65,7 @@ Finally, we will execute an action that requires our identification on GitHub to
 ```bash
 # SSH terminal
 
-git clone https://github.com/EPFLiGHT/MultiMeditron.git
+git clone https://github.com/some/private_repo.git
 ```
 If you were able to clone the repo, then your setup is correct.
 
@@ -89,8 +89,8 @@ Install kubectl
 ```bash
 # Your terminal (either WSL, Linux or Mac)
 
-curl -LO "https://dl.k8s.io/release/v1.29.6/bin/darwin/arm64/kubectl"
-# Linux: curl -LO "https://dl.k8s.io/release/v1.29.6/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/release/v1.29.6/bin/linux/amd64/kubectl" # Linux
+# curl -LO "https://dl.k8s.io/release/v1.29.6/bin/darwin/arm64/kubectl" # macOS
 
 # Give it the right permissions and move it.
 chmod +x ./kubectl
@@ -113,8 +113,8 @@ Install the run:ai CLI for RCP (two RCP clusters):
 # Your terminal
 
 # Download the CLI from the link shown in the help section.
-# for Linux: replace `darwin` with `linux`
-wget --content-disposition https://rcp-caas-prod.rcp.epfl.ch/cli/darwin
+# for macOS: replace `linux` with `darwin`
+wget --content-disposition https://rcp-caas-prod.rcp.epfl.ch/cli/linux
 # Give it the right permissions and move it.
 chmod +x ./runai
 sudo mv ./runai /usr/local/bin/runai
@@ -123,7 +123,7 @@ sudo chown root: /usr/local/bin/runai
 
 ## 4. Login
 
-The RCP is organized into a [3 level hierarchy](https://wiki.rcp.epfl.ch/en/home/CaaS/FAQ/how-to-use-runai#access-hierarchy). The department is the laboratory (e.g. LIGHT or MLO). The projects determine which scratch (aka persistent storage) we have access to. Note that you should choose the SSO option when executing `runai login`.
+The RCP is organized into a [3 level hierarchy](https://wiki.rcp.epfl.ch/en/home/CaaS/FAQ/how-to-use-runai#access-hierarchy). The department is the laboratory (e.g. LiGHT). The projects determine which scratch (aka persistent storage) we have access to. Note that you should choose the SSO option when executing `runai login`.
 
 
 ```bash
@@ -137,22 +137,22 @@ runai config project light-$GASPAR
 
 ## 5. Submit a job
 
-Time to test if we can submit a job! This command will allocate 1 GPU from the cluster and "sleep" to infinity (meaning that it will do essentially nothing) 
+Build your image following the [Docker tutorial](rcp_docker.md). Once you are done, it's time to test if we can submit a job! This command will allocate 1 GPU from the cluster and "sleep" to infinity (meaning that it will do essentially nothing) 
 
 ```bash
 # Your terminal
 
 runai submit \
-  --name meditron-basic \
+  --name base-job \
   --image registry.rcp.epfl.ch/multimeditron/basic:latest-$GASPAR\
-  --pvc light-scratch:/mloscratch \
+  --pvc light-scratch:/lightscratch \
   --large-shm \
-  -e NAS_HOME=/mloscratch/users/$GASPAR \
-  -e HF_API_KEY_FILE_AT=/mloscratch/users/$GASPAR/keys/hf_key.txt \
-  -e WANDB_API_KEY_FILE_AT=/mloscratch/users/$GASPAR/keys/wandb_key.txt \
-  -e GITCONFIG_AT=/mloscratch/users/$GASPAR/.gitconfig \
-  -e GIT_CREDENTIALS_AT=/mloscratch/users/$GASPAR/.git-credentials \
-  -e VSCODE_CONFIG_AT=/mloscratch/users/$GASPAR/.vscode-server \
+  -e NAS_HOME=/lightscratch/users/$GASPAR \
+  -e HF_API_KEY_FILE_AT=/lightscratch/users/$GASPAR/keys/hf_key.txt \
+  -e WANDB_API_KEY_FILE_AT=/lightscratch/users/$GASPAR/keys/wandb_key.txt \
+  -e GITCONFIG_AT=/lightscratch/users/$GASPAR/.gitconfig \
+  -e GIT_CREDENTIALS_AT=/lightscratch/users/$GASPAR/.git-credentials \
+  -e VSCODE_CONFIG_AT=/lightscratch/users/$GASPAR/.vscode-server \
   --backoff-limit 0 \
   --run-as-gid 84257 \
   --node-pool h100 \
@@ -160,42 +160,41 @@ runai submit \
   -- sleep infinity
 ```
 
-> Note: If you have issue with the job not being launched (after doing a `describe`), ensure that there is such an image in [the registry](registry.rcp.epfl.ch). You can build your image following the docker tutorial.
+> Note: If you have issue with the job not being launched (after doing a `describe`), ensure that there is such an image in [the registry](https://registry.rcp.epfl.ch). You can build your image following the docker tutorial.
+> Note: It is heavily recommended to save this command into a `shell` file, to easily edit it and launch jobs with `bash connect.sh` for instance. You may have two files, one for CPU-only jobs and one for GPU (make sure to give them different names). Generally you don't need more than those two. **Important to know: jobs with GPUs are time limited, they are automatically shut down after 2 hours of using no GPUs, whereas there is no such limitation for CPU-only jobs**.
 
 Explanation:
 
 * `name` is the name of the job
 * `image` is the link to the docker image that will be attached to the cluster. **Please note that you may need to change the image path if you pushed your image on another link. See [Building Docker image for the RCP](rcp_docker.md)**
-* `pvc` determines which scratch will be mounted to the job. The argument is of the form: `name_of_the_scratch:/mount/path/to/scratch`. Here the we are mounting the scratch named `light-scratch` to the local path `/mloscratch` **This is part may cause an error because of the LIGHT migration** 
-* `gpu` is the number of GPU that you want to claim for this job (larger amount of GPU will be harder to get as ressources are limited)
-
-> Note: It is heavily recommended to save this command into a `shell` file, to easily edit it and launch jobs with `bash connect.sh` for instance. You may have two files, one for CPU-only jobs and one for GPU (make sure to give them different names). Generally you don't need more than those two. Important to know: jobs with GPUs are time limited, they are automatically shut down after 2 hours of using no GPUs, whereas there is no such limitation for CPU-only jobs.
+* `pvc` determines which scratch will be mounted to the job. The argument is of the form: `name_of_the_scratch:/mount/path/to/scratch`. Here the we are mounting the scratch named `light-scratch` to the local path `/lightscratch` **This part may cause an error because of the LIGHT migration** 
+* `gpu` is the number of GPUs that you want to claim for this job (larger amount of GPU will be harder to get, as ressources are limited)
 
 We can check the outputs of our container and the status of the job using the following commands respectively.
 ```bash
 # Your terminal
 
-runai logs meditron-basic
-runai describe job meditron-basic
+runai logs base-job
+runai describe job base-job
 ```
 
 To end a job, run the command:
 ```bash
 # Your terminal
 
-runai delete job meditron-basic
+runai delete job base-job
 ```
 
 You can access your job by doing
 ```bash
 # Your terminal
 
-runai bash meditron-basic
+runai bash base-job
 ```
 
-You should see a terminal opening. By default it redirects you to the folder `/workspace`. This folder is not persistent, it is heavily recommended to always start using the job by moving to your personal folder you made earlier, at `/mloscratch/users/$GASPAR_USER`.
+You should see a terminal opening. By default it redirects you to the folder `/workspace`. This folder is not persistent, **it is heavily recommended to always start using the job by moving to your personal folder you made earlier, at `/lightscratch/users/$GASPAR_USER`**.
 
-Enter the following command in your new terminal to ensure that you have indeed a GPU: 
+You may enter the following command in your new terminal to ensure that you have indeed a GPU: 
 ```bash
 # Job terminal
 
@@ -206,7 +205,7 @@ Once you are done, run the following command to delete the job:
 ```bash
 # Your terminal
 
-runai delete job meditron-basic
+runai delete job base-job
 ```
 
 ## 6. VSCode connection
@@ -218,7 +217,7 @@ Once we have the container running on a node of the RCP cluster, we can attach t
 * [Kubernetes](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools)
 * [Dev containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-From the Kubernetes menu, we can see the IC and the RCP Cluster. We will enter the menu of the RCP Cluster -> Workloads -> Pods and we will see our container with a green indicator showing that it is running. Right-clicking on it will give us the option to "Attach to Visual Studio". Upon clicking, the editor will open in a new window within the container. We are then invited to open a folder, it should be our personal folder (`/mloscratch/users/$GASPAR`) by default, select it. When opening a new terminal, we should find ourselves directly in our personal folder, if needed we can move there with `cd` in the terminal. We can install new extensions on VS code, and they will be saved for future sessions.
+From the Kubernetes menu, we can see the IC and the RCP Cluster. We will enter the menu of the RCP Cluster -> Workloads -> Pods and we will see our container with a green indicator showing that it is running. Right-clicking on it will give us the option to "Attach to Visual Studio". Upon clicking, the editor will open in a new window within the container. We are then invited to open a folder, it should be our personal folder (`/lightscratch/users/$GASPAR`) by default, select it. When opening a new terminal, we should find ourselves directly in our personal folder, if needed we can move there with `cd` in the terminal. We can install new extensions on VS code, and they will be saved for future sessions.
 
 ### Windows (WSL connection)
 
@@ -245,16 +244,16 @@ In **WSL**, claim a job and copy the kube configuration file from WSL to Windows
 # WSL terminal
 
 runai submit \
-  --name meditron-basic \
+  --name base-job \
   --image registry.rcp.epfl.ch/multimeditron/basic:latest-$GASPAR\
-  --pvc light-scratch:/mloscratch \
+  --pvc light-scratch:/lightscratch \
   --large-shm \
-  -e NAS_HOME=/mloscratch/users/$GASPAR \
-  -e HF_API_KEY_FILE_AT=/mloscratch/users/$GASPAR/keys/hf_key.txt \
-  -e WANDB_API_KEY_FILE_AT=/mloscratch/users/$GASPAR/keys/wandb_key.txt \
-  -e GITCONFIG_AT=/mloscratch/users/$GASPAR/.gitconfig \
-  -e GIT_CREDENTIALS_AT=/mloscratch/users/$GASPAR/.git-credentials \
-  -e VSCODE_CONFIG_AT=/mloscratch/users/$GASPAR/.vscode-server \
+  -e NAS_HOME=/lightscratch/users/$GASPAR \
+  -e HF_API_KEY_FILE_AT=/lightscratch/users/$GASPAR/keys/hf_key.txt \
+  -e WANDB_API_KEY_FILE_AT=/lightscratch/users/$GASPAR/keys/wandb_key.txt \
+  -e GITCONFIG_AT=/lightscratch/users/$GASPAR/.gitconfig \
+  -e GIT_CREDENTIALS_AT=/lightscratch/users/$GASPAR/.git-credentials \
+  -e VSCODE_CONFIG_AT=/lightscratch/users/$GASPAR/.vscode-server \
   --backoff-limit 0 \
   --run-as-gid 84257 \
   --node-pool h100 \
@@ -267,7 +266,7 @@ cp ~/.kube/config /mnt/c/Users/$WINDOWS_USERNAME/.kube/config
 Open VSCode. Install this extension: https://marketplace.visualstudio.com/items?itemName=mtsmfm.vscode-k8s-quick-attach. 
 
 To attach VSCode to your job:
-Go to View -> Command Palette (or Ctrl+Shift+P), search for "k8s quick attach: Quick attach k8s Pod" -> rcp-caas -> runai-mlo-GASPAR -> meditron-basic-0-0 -> /mloscratch/users/$GASPAR_USER.
+Go to View -> Command Palette (or Ctrl+Shift+P), search for "k8s quick attach: Quick attach k8s Pod" -> rcp-caas -> runai-mlo-GASPAR -> meditron-basic-0-0 -> /lightscratch/users/$GASPAR_USER.
 
 #### VSCode Troubleshooting
 
