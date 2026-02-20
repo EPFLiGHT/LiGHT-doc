@@ -29,7 +29,7 @@ We will build the docker images in the following way:
 
 This folder contains a `template.sh` file which contains all the available functions
 
-### Creating a project on the EPFL registry (Optional)
+### Creating a project on the EPFL registry
 
 EPFL has a registry of docker images which works in a similar way to the Docker hub. This registry is used to store docker images and is only accessible through the EPFL network (you may use the [EPFL VPN](https://www.epfl.ch/campus/services/ressources-informatiques/network-services-reseau/acces-intranet-a-distance/clients-vpn-disponibles/)).
 
