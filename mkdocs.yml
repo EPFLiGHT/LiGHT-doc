@@ -100,7 +100,7 @@ nav:
       - Overview: clusters.md
       - RCP:
           - Connecting to the RCP: clusters/rcp/rcp.md
-          - (Optional) Building Docker image for the RCP: clusters/rcp/rcp_docker.md
+          - Building Docker image for the RCP: clusters/rcp/rcp_docker.md
       - CSCS:
           - Introduction: clusters/cscs/intro_cscs.md
           - (Optional) Building image for the CSCS: clusters/cscs/cscs_docker.md
