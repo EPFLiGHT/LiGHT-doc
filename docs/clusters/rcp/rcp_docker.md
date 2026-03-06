@@ -165,7 +165,7 @@ To build the user docker image, run:
 Login to the registry:
 
 ```
-docker login
+docker login registry.rcp.epfl.ch
 ```
 
 The login informations are your EPFL credentials
