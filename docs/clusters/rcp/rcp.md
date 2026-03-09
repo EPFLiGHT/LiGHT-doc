@@ -2,7 +2,7 @@
 
 ## 1. Pre-setup (access to scratch and cluster)
 
-Please ask [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the corresponding groups (send a message on Slack to get a faster answer). You can check your groups at [groups.epfl.ch](https://groups.epfl.ch/).
+Please ask [Peter](mailto:peter.ahumuza@epfl.ch) to add you to the corresponding groups (send a message on Slack to get a faster answer). You can check your groups at [groups.epfl.ch](https://groups.epfl.ch/), when connected on the EPFL network (either locally or through the VPN).
 
 ## 2. Setting-up credentials
 
@@ -124,6 +124,8 @@ sudo chown root: /usr/local/bin/runai
 ## 4. Login
 
 The RCP is organized into a [3 level hierarchy](https://wiki.rcp.epfl.ch/en/home/CaaS/FAQ/how-to-use-runai#access-hierarchy). The department is the laboratory (e.g. LiGHT). The projects determine which scratch (aka persistent storage) we have access to. Note that you should choose the SSO option when executing `runai login`.
+
+> Note: Beware that you have to be connected on the EPFL network (either locally or through the VPN) to use `runai` commands.
 
 
 ```bash
