@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # deploy only when main is updated
+  workflow_dispatch:
 
 permissions:
   contents: write  # needed to push to gh-pages branch
