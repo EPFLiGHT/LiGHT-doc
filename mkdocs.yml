@@ -95,7 +95,7 @@ extra_javascript:
 nav:
   - Home: index.md
   - Getting started: gettingstarted.md
-  - Projects: projects.md
+  - Checklists: checklist.md
   - Clusters documentation:
       - Overview: clusters.md
       - RCP:
