@@ -1,17 +1,10 @@
 # Welcome to LiGHT
 
-LiGHT stands for Laboratory for Intelligent Global Health and Humanitarian Response Technologies
-
 If you are new to LiGHT, start by reading the [Getting Started tutorial](gettingstarted.md)
 
 ## Checklists
 
 Please refer to the [Checklist](checklist.md) for the LiGHT lab documentation standards, workflows, and publishing guidance. 
-
-## Projects
-
-If you are a student interested in joining LiGHT (or just curious about what we do), you
-can explore our ongoing projects in the [Projects section](projects.md)
 
 ## Clusters
 
